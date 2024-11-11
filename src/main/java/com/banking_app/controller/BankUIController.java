@@ -1,0 +1,156 @@
+package com.banking_app.controller;
+
+import com.banking_app.dto.WithDrawRequest;
+import com.banking_app.entity.Account;
+import com.banking_app.service.AccountService;
+import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+@Controller
+@AllArgsConstructor
+public class BankUIController {
+
+    private final AccountService accountService;
+
+    // Home Page with Navigation
+    @GetMapping("/")
+    public String homePage() {
+        return "home";
+    }
+
+    // Create New Account Page
+    // Show the create account page
+    @GetMapping("/account/create")
+    public String showCreateAccountForm(Model model) {
+        model.addAttribute("account", new Account());
+        return "createAccount";
+    }
+
+    // Handle account creation
+    @PostMapping("/account/save")
+    public String createAccount(Account account, Model model) {
+        Account createdAccount = accountService.createAccount(account);
+        model.addAttribute("account", createdAccount);
+        return "account_details";
+    }
+
+    // Account Details Page - Requires Account Number
+    @GetMapping("/account/view/{accountNumber}")
+    public String viewAccount(@PathVariable Long accountNumber, Model model) {
+        Account account = accountService.getAllAccounts().stream()
+                .filter(acc -> acc.getAccountNumber().equals(accountNumber))
+                .findFirst()
+                .orElse(null);
+        if (account == null) {
+            return "account-not-found"; // Error page if account is not found
+        }
+        model.addAttribute("account", account);
+        return "view_account"; // Template for viewing account details
+    }
+
+
+    @GetMapping("/account/view-form")
+    public String showViewAccountForm(Model model) {
+        model.addAttribute("account", new Account()); // Empty account object to bind form fields
+        return "view_account_form"; // Return the view_account_form.html page
+    }
+
+    // Validate the account number and name, then show account details if valid
+    @PostMapping("/account/validate")
+    public String validateAccount(Account account, Model model) {
+        Account foundAccount = accountService.viewAccount(account.getAccountNumber());
+
+        if (foundAccount != null) {
+            model.addAttribute("account", foundAccount);
+            return "view_account"; // Show account details page if found
+        } else {
+            model.addAttribute("error", "Account number and name do not match.");
+            return "view_account_form"; // Return back to the form with an error message
+        }
+    }
+
+    @PostMapping("/account/delete/{accountNumber}")
+    public String deleteAccount(@PathVariable("accountNumber") Long accountNumber, Model model) {
+        boolean deleted = accountService.deleteAccount(accountNumber);
+        try {
+            if (deleted) {
+                model.addAttribute("accountNumber", accountNumber);
+                return "delete_account_success";
+            } else {
+                model.addAttribute("errorMessage", "User not found with Account Number: " + accountNumber);
+                return "delete_account_error"; // Redirect to error page
+            }
+        } catch (Exception e) {
+            model.addAttribute("errorMessage", "An error occurred while trying to delete the account.");
+            return "delete_account_error"; // Redirect to error page template
+        }
+    }
+
+
+    // Withdraw Amount - API call
+    @PostMapping("/account/{accountNumber}/withdraw")
+    public String withdrawAmount(@PathVariable Long accountNumber, @RequestParam Long amount, Model model) {
+        accountService.withDrawAmount(accountNumber, amount);
+        return "redirect:/account/" + accountNumber;
+    }
+
+
+    @GetMapping("/account/deposit/{accountNumber}")
+    public String showDepositForm(@PathVariable Long accountNumber, Model model) {
+        Account account = accountService.viewAccount(accountNumber);
+        if (account == null) {
+            model.addAttribute("error", "Account not found.");
+            return "view_account"; // Return error message if account not found
+        }
+        model.addAttribute("account", account);
+        model.addAttribute("depositRequest", new WithDrawRequest());
+        return "deposit"; // Page to show deposit form
+    }
+
+    // Handle Deposit
+    @PostMapping("/account/deposit/{accountNumber}")
+    public String depositAmount(@PathVariable Long accountNumber,
+                                @ModelAttribute WithDrawRequest request, Model model) {
+        try {
+            // Call the service to deposit the amount
+            Account updatedAccount = accountService.depositAmount(accountNumber, request.getAmount());
+            model.addAttribute("account", updatedAccount);
+            model.addAttribute("message", "Amount deposited successfully. New Balance: " + updatedAccount.getBalance());
+            return "view_account"; // Redirect to the view account page with updated balance
+        } catch (Exception e) {
+            model.addAttribute("error", "Error while depositing amount to Account Number: " + accountNumber);
+            return "view_account"; // Show error message in case of failure
+        }
+    }
+
+    @GetMapping("/account/withdraw/{accountNumber}")
+    public String showWithDrawForm(@PathVariable Long accountNumber, Model model) {
+        Account account = accountService.viewAccount(accountNumber);
+        if (account == null) {
+            model.addAttribute("error", "Account not found.");
+            return "view_account"; // Return error message if account not found
+        }
+        model.addAttribute("account", account);
+        model.addAttribute("depositRequest", new WithDrawRequest());
+        return "withdraw"; // Page to show deposit form
+    }
+
+    // Handle Deposit
+    @PostMapping("/account/withdraw/{accountNumber}")
+    public String withdrawAmount(@PathVariable Long accountNumber,
+                                @ModelAttribute WithDrawRequest request, Model model) {
+        try {
+            // Call the service to deposit the amount
+            Account updatedAccount = accountService.withDrawAmount(accountNumber, request.getAmount());
+            model.addAttribute("account", updatedAccount);
+            model.addAttribute("message", "Amount withdraw successfully. New Balance : " + updatedAccount.getBalance());
+            return "view_account"; // Redirect to the view account page with updated balance
+        } catch (Exception e) {
+            model.addAttribute("error", "Error while withdraw amount to Account Number: " + accountNumber);
+            return "view_account"; // Show error message in case of failure
+        }
+    }
+}
