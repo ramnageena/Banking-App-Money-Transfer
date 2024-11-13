@@ -1,13 +1,17 @@
 package com.banking_app.controller;
 
+import com.banking_app.dto.TransferRequest;
 import com.banking_app.dto.WithDrawRequest;
 import com.banking_app.entity.Account;
 import com.banking_app.service.AccountService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @AllArgsConstructor
@@ -141,7 +145,7 @@ public class BankUIController {
     // Handle Deposit
     @PostMapping("/account/withdraw/{accountNumber}")
     public String withdrawAmount(@PathVariable Long accountNumber,
-                                @ModelAttribute WithDrawRequest request, Model model) {
+                                 @ModelAttribute WithDrawRequest request, Model model) {
         try {
             // Call the service to deposit the amount
             Account updatedAccount = accountService.withDrawAmount(accountNumber, request.getAmount());
@@ -151,6 +155,32 @@ public class BankUIController {
         } catch (Exception e) {
             model.addAttribute("error", "Error while withdraw amount to Account Number: " + accountNumber);
             return "view_account"; // Show error message in case of failure
+        }
+    }
+
+    @GetMapping("/account/transfer/{accountNumber}")
+    public String showTransferPage(@PathVariable Long accountNumber, Model model) {
+        Account account = accountService.viewAccount(accountNumber);
+        model.addAttribute("account", account);
+        return "transfer";
+    }
+
+    // Handle transfer submission
+    @PostMapping("/account/transfer")
+    public String transferAmount(@ModelAttribute TransferRequest transferRequest, Model model) {
+        try {
+            // Perform the transfer
+            accountService.transferMoney(
+                    transferRequest.getFromAccountNumber(),
+                    transferRequest.getToAccountNumber(),
+                    transferRequest.getAmount()
+            );
+
+            model.addAttribute("message", "Transfer successful!");
+            return "redirect:/account/view/" + transferRequest.getFromAccountNumber(); // Redirect to the sender's account details page
+        } catch (Exception e) {
+            model.addAttribute("error", "Error during transfer: " + e.getMessage());
+            return "transfer"; // Stay on the transfer form if there's an error
         }
     }
 }

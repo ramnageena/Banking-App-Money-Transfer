@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transfer Money</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Arial', sans-serif;
+        }
+        .navbar {
+            background-color: #005cbf;
+        }
+         .navbar-brand img {
+            height: 40px;
+        }
+        .container h2 {
+            color: #004ba0;
+            font-weight: bold;
+        }
+        .card {
+            margin-top: 20px;
+            border: 1px solid #ddd;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .card-header {
+            background-color: #004ba0;
+            color: white;
+            font-weight: bold;
+        }
+        .small-label {
+            font-size: 0.85rem;
+        }
+        .btn-success {
+            font-size: 16px;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 50px;
+            font-size: 14px;
+            color: #777;
+        }
+        /* Custom width for the deposit input box */
+        .input-smaller {
+            max-width: 300px; /* Adjust this value to change the input width */
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container">
+        <a class="navbar-brand" href="#">
+            <img src="/images/citi-logo.jpg" alt="Citi Logo">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Home</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Transfer Money</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="contact.html">Contact</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container mt-5">
+    <h2>Transfer Money</h2>
+
+    <!-- Success/Error Message -->
+    <div th:if="${error}" class="alert alert-danger">
+        <p th:text="${error}"></p>
+    </div>
+    <div th:if="${message}" class="alert alert-success">
+        <p th:text="${message}"></p>
+    </div>
+
+    <!-- Account Details and Transfer Form in One Card -->
+    <div class="card">
+        <div class="card-header">
+            Account Details and Transfer Money
+        </div>
+        <div class="card-body">
+            <!-- Account Details -->
+            <table class="table table-bordered mb-4">
+                <thead>
+                <tr>
+                    <th>Account Number</th>
+                    <th>Account Holder Name</th>
+                    <th>Current Balance</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td th:text="${account.accountNumber}"></td>
+                    <td th:text="${account.name}"></td>
+                    <td th:text="${account.balance}"></td>
+                </tr>
+                </tbody>
+            </table>
+
+            <!-- Transfer Form -->
+            <form th:action="@{/account/transfer}" method="post">
+                <input type="hidden" th:value="${account.accountNumber}" name="fromAccountNumber"/>
+
+                <!-- To Account Number -->
+                <div class="form-group">
+                    <label class="small-label" ><strong>To Account Number:</strong></label>
+                    <input type="number" name="toAccountNumber" class="form-control form-control-sm input-smaller" required/>
+                </div>
+
+                <!-- Amount -->
+                <div class="form-group">
+                    <strong class="small-label" >Amount:</strong>
+                    <input type="number" name="amount"  class="form-control form-control-sm input-smaller" required/>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Transfer</button>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+<div class="footer">
+    <p>&copy; 2024 Citi Bank | <a href="#">Privacy Policy</a> | <a href="#">Terms & Conditions</a></p>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
