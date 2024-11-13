@@ -11,4 +11,5 @@ public interface AccountService {
     Account depositAmount(Long accountNumber,Long amount);
     boolean deleteAccount(Long accountNumber);
     Account viewAccount(Long accountNumber);
+    void transferMoney(Long fromAccountNumber,Long toAccountNumber,Long amount);
 }

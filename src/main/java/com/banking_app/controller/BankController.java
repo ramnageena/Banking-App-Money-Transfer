@@ -1,8 +1,10 @@
-/*
 package com.banking_app.controller;
 
+import com.banking_app.dto.TransferRequest;
 import com.banking_app.dto.WithDrawRequest;
 import com.banking_app.entity.Account;
+import com.banking_app.exception.AccountNotFoundException;
+import com.banking_app.exception.InsufficientException;
 import com.banking_app.service.AccountService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -94,5 +96,29 @@ public class BankController {
             return new ResponseEntity<>( HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @PostMapping("/transfer")
+    public ResponseEntity<String> transferAmount(@RequestBody TransferRequest request) {
+        try {
+            log.info("Received transfer request: From account {} to account {}, Amount: {}",
+                    request.getFromAccountNumber(), request.getToAccountNumber(), request.getAmount());
+
+            accountService.transferMoney(request.getFromAccountNumber(), request.getToAccountNumber(), request.getAmount());
+
+            log.info("Transfer completed successfully for request: From account {} to account {}",
+                    request.getFromAccountNumber(), request.getToAccountNumber());
+
+            return new ResponseEntity<>("Transfer completed successfully.", HttpStatus.OK);
+        } catch (AccountNotFoundException ex) {
+            log.error("Account not found error: {}", ex.getMessage());
+            return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
+        } catch (InsufficientException ex) {
+            log.error("Insufficient funds error: {}", ex.getMessage());
+            return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
+        } catch (Exception ex) {
+            log.error("Unexpected error during transfer: ", ex);
+            return new ResponseEntity<>("Transfer failed due to an internal error.", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
 }
-*/
