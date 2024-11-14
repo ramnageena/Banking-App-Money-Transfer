@@ -5,17 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>View Account</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         body {
             font-family: 'Arial', sans-serif;
-            background-color: #f8f9fa;
+            background-color: #f0f2f5;
             color: #333;
         }
 
-         .navbar {
-          padding: 8px 0;
-        background-color: #005cbf;
-    }
+        .navbar {
+            padding: 8px 0;
+            background-color: #005cbf;
+        }
 
         .navbar-brand img {
             height: 40px;
@@ -31,23 +32,24 @@
         }
 
         .container {
-            padding: 30px;
-<!--            background-color: white;-->
-            border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            max-width: 800px;
-            margin-top: 0px;
+            padding: 40px;
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+            max-width: 850px;
+            margin-top: 30px;
         }
 
         .container h2 {
-            color: #004ba0;
-            font-size: 24px;
-            margin-bottom: 20px;
+            color: #005cbf;
+            font-size: 26px;
             font-weight: bold;
+            text-align: center;
+            margin-bottom: 25px;
         }
 
         .table th {
-            background-color: #004ba0;
+            background-color: #005cbf;
             color: white;
             text-align: center;
         }
@@ -59,41 +61,50 @@
 
         .btn {
             font-size: 16px;
-            padding: 8px 20px;
-            border-radius: 4px;
+            padding: 10px 25px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
         }
 
         .btn-danger {
-            background-color: #dc3545;
-            border-color: #dc3545;
-            margin-right: 10px;
+            background-color: #e63946;
+            border-color: #e63946;
         }
 
         .btn-danger:hover {
-            background-color: #c82333;
-            border-color: #bd2130;
+            background-color: #c5303d;
+            border-color: #b82834;
         }
 
         .btn-info {
-            background-color: #17a2b8;
-            border-color: #17a2b8;
-            margin-right: 10px;
+            background-color: #219ebc;
+            border-color: #219ebc;
         }
 
         .btn-info:hover {
-            background-color: #138496;
-            border-color: #117a8b;
+            background-color: #197d9c;
+            border-color: #177089;
         }
 
         .btn-success {
-            background-color: #28a745;
-            border-color: #28a745;
+            background-color: #38b000;
+            border-color: #38b000;
         }
-  .footer {
-            text-align: center;
-            margin-top: 50px;
-            font-size: 14px;
-            color: #777;
+
+        .btn-success:hover {
+            background-color: #2a8a00;
+            border-color: #247800;
+        }
+
+        .btn-primary {
+            background-color: #0077b6;
+            border-color: #0077b6;
+        }
+
+        .btn-primary:hover {
+            background-color: #005f99;
+            border-color: #004d7a;
         }
 
         .footer {
@@ -102,11 +113,6 @@
             font-size: 14px;
             color: #777;
         }
-
-        .btn-success:hover {
-            background-color: #218838;
-            border-color: #1e7e34;
-        }
     </style>
 </head>
 <body>
@@ -114,45 +120,40 @@
     <a class="navbar-brand" href="#">
         <img src="/images/citi-logo.jpg" alt="Citi Logo">
     </a>
-    <div class="container">
+    <div class="collapse navbar-collapse justify-content-end">
+        <ul class="navbar-nav">
 
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="/">Home</a>
-                </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">About</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="contact.html">Contact</a>
-                </li>
-            </ul>
-        </div>
+            <li class="nav-item">
+                <a class="nav-link" href="/"><i class="fas fa-home"></i> Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/about"><i class="fas fa-info-circle"></i> About</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/contact"><i class="fas fa-envelope"></i> Contact</a>
+            </li>
+        </ul>
     </div>
 </nav>
 
 <div class="container">
-    <h2>Account Details</h2>
+    <h2><i class="fas fa-user-circle"></i> Account Details</h2>
 
     <!-- Displaying success or error messages -->
-    <div th:if="${message}" class="alert alert-success">
+    <div th:if="${message}" class="alert alert-success text-center">
         <span th:text="${message}"></span>
     </div>
 
     <!-- Account Details -->
-    <table class="table table-bordered">
+    <table class="table table-hover table-bordered">
         <thead>
         <tr>
-            <th scope="col">Account Number</th>
-            <th scope="col">Account Holder Name</th>
-            <th scope="col">Account Type</th>
-            <th scope="col">Email</th>
-            <th scope="col">Gender</th>
-            <th scope="col">Balance</th>
+            <th scope="col"><i class="fas fa-hashtag"></i> Account Number</th>
+            <th scope="col"><i class="fas fa-user"></i> Account Holder Name</th>
+            <th scope="col"><i class="fas fa-university"></i> Account Type</th>
+            <th scope="col"><i class="fas fa-envelope"></i> Email</th>
+            <th scope="col"><i class="fas fa-venus-mars"></i> Gender</th>
+            <th scope="col"><i class="fas fa-money-bill-wave"></i> Balance</th>
         </tr>
         </thead>
         <tbody>
@@ -168,20 +169,29 @@
     </table>
 
     <!-- Buttons aligned side by side -->
-    <div class="d-flex mt-4">
+    <div class="d-flex justify-content-center mt-4">
         <!-- Delete Account Button -->
         <form th:action="@{/account/delete/{accountNumber}(accountNumber=${account.accountNumber})}" method="post" class="mr-2">
             <input type="hidden" name="_method" value="delete" />
-            <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this account?')">Delete</button>
+            <button type="submit" class="btn btn-danger mr-2" onclick="return confirm('Are you sure you want to delete this account?')">
+                <i class="fas fa-trash-alt"></i>&nbsp; Delete
+            </button>
         </form>
 
         <!-- New Deposit Button -->
-        <a th:href="@{/account/deposit/{accountNumber}(accountNumber=${account.accountNumber})}" class="btn btn-info mr-2">Deposit</a>
+        <a th:href="@{/account/deposit/{accountNumber}(accountNumber=${account.accountNumber})}" class="btn btn-info mr-2">
+            <i class="fas fa-plus-circle"></i>&nbsp; Deposit
+        </a>
 
         <!-- Withdraw Button -->
-        <a th:href="@{/account/withdraw/{accountNumber}(accountNumber=${account.accountNumber})}" class="btn btn-success">Withdraw</a>
+        <a th:href="@{/account/withdraw/{accountNumber}(accountNumber=${account.accountNumber})}" class="btn btn-success mr-2">
+            <i class="fas fa-minus-circle"></i>&nbsp; Withdraw
+        </a>
+
         <!-- Transfer Button -->
-        <a th:href="@{/account/transfer/{accountNumber}(accountNumber=${account.accountNumber})}" class="btn btn-primary ml-2">Transfer</a>
+        <a th:href="@{/account/transfer/{accountNumber}(accountNumber=${account.accountNumber})}" class="btn btn-primary">
+            <i class="fas fa-exchange-alt"></i>&nbsp; Transfer
+        </a>
     </div>
 </div>
 <div class="footer">

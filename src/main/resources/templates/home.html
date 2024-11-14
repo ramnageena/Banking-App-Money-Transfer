@@ -7,150 +7,191 @@
           content="Citibank India offers a wide range of Credit Cards, Banking, Wealth Management & Investment services. Our Loans, Insurance, Corporate & NRI Banking options will help you fulfill all your personal banking needs!" />
     <meta name="Keywords"
           content="credit card, banking, wealth management, personal loan, home loan, investment, insurance, salary account, business banking, corporate banking, nri banking" />
-    <meta content="credit cards india, online banking, Citibank india, nri services, wealth management services, investments, insurance" />
     <title>Citibank - Home</title>
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Bootstrap & Font Awesome -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
     <style>
         /* Custom styles */
         body {
-            background-color: #f4f4f9;
             font-family: Arial, sans-serif;
+            background-color: #f7f9fc;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
         .container {
-            margin-top: 50px;
-        }
-        .section-title {
-            text-align: center;
-            margin-bottom: 30px;
-            font-weight: bold;
-        }
-        .section-card {
-            margin-top: 20px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
+            max-width: 1200px;
             padding: 20px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            background-color: white;
-        }
-        .card-title {
-            font-size: 1.5rem;
-            font-weight: 500;
-        }
-        .btn-custom {
-            background-color: #005cbf;
-            color: white;
-        }
-        .btn-custom:hover {
-            background-color: #003d99;
+            text-align: center;
         }
         .navbar {
             background-color: #005cbf;
+            width: 100%;
+            padding: 10px 20px;
         }
         .navbar-brand img {
-            height: 50px; /* Adjusted logo size */
+            height: 40px;
+        }
+        .navbar-nav {
+            flex-direction: row;
+            gap: 20px;
         }
         .navbar-nav .nav-link {
-            color: white !important;
+            color: white;
+            font-weight: bold;
         }
         .navbar-nav .nav-link:hover {
-            color: #f0f0f0 !important;
+            color: #f0f0f0;
         }
-        .about-section, .contact-section {
-            background-color: #f8f8f8;
-            padding: 30px 0;
+        .navbar .navbar-brand,
+        .navbar .navbar-nav {
+            align-items: center;
         }
-        /* New Section for Meta Description and Keywords */
-        .meta-info {
-            background-color: #e9f7fe;
+        .navbar .navbar-collapse {
+            justify-content: flex-end;
+        }
+        .header-section {
+            margin-top: 20px;
             padding: 20px;
-            margin-top: 30px;
+            background-color: #e9f7fe;
             border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
-         .footer {
-            text-align: center;
-            margin-top: 50px;
-            font-size: 14px;
-            color: #777;
-        }
-
-        .meta-info h3 {
-            text-align: center;
+        .header-section h2 {
+            font-size: 2rem;
+            color: #005cbf;
             font-weight: bold;
+        }
+        .header-section p {
+            font-size: 1.1rem;
+            color: #333;
+        }
+        .icon-section {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 20px;
+        }
+        .icon-box {
+            width: 140px;
+            text-align: center;
             color: #005cbf;
         }
-        .meta-info p {
-            text-align: center;
-            font-size: 1.2rem;
+        .icon-box i {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+        .meta-info {
+            background-color: #e9f7fe;
+            padding: 15px;
+            margin-top: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             color: #333;
-            margin: 10px 0;
+        }
+        .meta-info h6 {
+            color: #005cbf;
+            font-weight: bold;
+            margin: 10px 0 5px;
+        }
+        .footer {
+            width: 100%;
+            text-align: center;
+            margin-top: 20px;
+            padding: 10px 0;
+            background-color: #005cbf;
+            color: white;
+            font-size: 14px;
+        }
+        .footer a {
+            color: #f0f0f0;
+            text-decoration: underline;
         }
     </style>
 </head>
 <body>
 
 <!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-dark">
-
-    <div class="container">
-        <!-- Citi Logo -->
-        <a class="navbar-brand" href="#">
-            <img src="/images/citi-logo.jpg" alt="Citi Logo" style="height: 50px;">
-        </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="/">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="about.html">About</a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarBanking" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Banking
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarBanking">
-                        <a class="dropdown-item" href="/account/create">Register</a>
-                        <a class="dropdown-item" href="/account/view-form" >Login</a>
-                    </div>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="contact.html">Contact</a>
-                </li>
-            </ul>
-        </div>
+<nav class="navbar navbar-expand-lg">
+    <a class="navbar-brand" href="#">
+        <img src="/images/citi-logo.jpg" alt="Citi Logo" style="height: 50px;">
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="/"><i class="fas fa-home"></i> Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/about"><i class="fas fa-info-circle"></i> About</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarBanking" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-university"></i> Banking
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarBanking">
+                    <a class="dropdown-item" href="/account/create"><i class="fas fa-user-plus"></i> Register</a>
+                    <a class="dropdown-item" href="/account/view-form"><i class="fas fa-sign-in-alt"></i> Login</a>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/contact"><i class="fas fa-envelope"></i> Contact</a>
+            </li>
+        </ul>
+            </li>
+        </ul>
     </div>
 </nav>
 
 <!-- Main Content -->
-<div id="home" class="container">
-    <div class="section-title">
+<div class="container">
+    <!-- Header Section -->
+    <div class="header-section">
         <h2>Welcome to Citibank</h2>
         <p>Your trusted partner for financial services.</p>
         <p>Citi India - Credit Cards, Personal & Home Loans, Investment, Wealth Management & Banking</p>
     </div>
 
-    <div class="section-card">
-        <p>Citibank is one of the world’s largest financial institutions, offering a range of financial services including banking, loans, and investments. With a presence in over 100 countries, Citibank serves millions of customers globally, providing them with innovative solutions and services.</p>
-        <p>For more details, visit the official <a href="https://www.online.citibank.co.in/" target="_blank">Citibank India website</a>.</p>
+    <!-- Icon Section -->
+    <div class="icon-section">
+        <div class="icon-box">
+            <i class="fas fa-credit-card"></i>
+            <p>Credit Cards</p>
+        </div>
+        <div class="icon-box">
+            <i class="fas fa-university"></i>
+            <p>Banking</p>
+
+        </div>
+        <div class="icon-box">
+            <i class="fas fa-chart-line"></i>
+            <p>Investments</p>
+        </div>
+        <div class="icon-box">
+            <i class="fas fa-user-shield"></i>
+            <p>Insurance</p>
+        </div>
+    </div>
+
+    <!-- Meta Information Section -->
+    <div class="meta-info">
+        <h6>Description:</h6>
+        <p>Citibank India offers a wide range of Credit Cards, Banking, Wealth Management & Investment services. Our Loans, Insurance, Corporate & NRI Banking options will help you fulfill all your personal banking needs!</p>
+        <h6>Keywords:</h6>
+        <p>Credit card, banking, wealth management, personal loan, home loan, investment, insurance, salary account, business banking, corporate banking, NRI banking.</p>
+        <h6>Related Services:</h6>
+        <p>Credit cards India, online banking, Citibank India, NRI services, wealth management services, investments, insurance.</p>
     </div>
 </div>
 
-<!-- Meta Info Section -->
-<div class="meta-info">
-    <h3>About Citibank India</h3>
-    <p><h6><strong>Description:</strong>Citibank India offers a wide range of Credit Cards, Banking, Wealth Management & Investment services. Our Loans, Insurance, Corporate & NRI Banking options will help you fulfill all your personal banking needs!</h6></p>
-    <p><h6><strong>Keywords:</strong> credit card, banking, wealth management, personal loan, home loan, investment, insurance, salary account, business banking, corporate banking, nri banking</h6></p>
-    <p><h6><strong>Related Services:</strong> credit cards india, online banking, Citibank india, nri services, wealth management services, investments, insurance</h6></p>
-</div>
+<!-- Footer -->
 <div class="footer">
     <p>&copy; 2024 Citi Bank | <a href="#">Privacy Policy</a> | <a href="#">Terms & Conditions</a></p>
 </div>
+
 <!-- Bootstrap JS and dependencies -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>

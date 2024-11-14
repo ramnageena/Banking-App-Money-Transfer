@@ -5,20 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create New Account</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         body {
             font-family: 'Arial', sans-serif;
-            background-color: #f8f9fa; /* Light gray background for the page */
+            background-color: #f8f9fa;
             color: #333;
         }
 
         .navbar {
-            background-color: #005cbf; /* Dark blue background */
-            padding: 8px 0; /* Reduced padding for a smaller header */
+            background-color: #005cbf;
+            padding: 8px 0;
         }
 
         .navbar-brand img {
-            height: 40px; /* Adjusted logo size */
+            height: 40px;
         }
 
         .navbar-nav .nav-item .nav-link {
@@ -29,15 +30,18 @@
         .navbar-nav .nav-item .nav-link:hover {
             color: #ffd700;
         }
-      .btn-primary {
-    background-color: #004ba0;
-    border-color: #004ba0;
-    padding: 12px 50px;
-    font-size: 18px;
-    border-radius: 4px;
-    margin-bottom: 15px; /* Add margin-bottom for space */
-}
-        .container {
+
+        .btn-primary {
+            background-color: #004ba0;
+            border-color: #004ba0;
+            padding: 10px 30px;
+            font-size: 15px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            margin-top: 15px;
+        }
+
+            .container {
 <!--            background-color: #ffffff; /* White background for form */-->
             padding: 50px;
             border-radius: 8px;
@@ -46,7 +50,7 @@
             margin-top: 30px;
         }
 
-        .container h2 {
+       .container h2 {
             color: #004ba0;
             font-size: 24px;
             margin-bottom: 20px;
@@ -56,6 +60,11 @@
         .form-label {
             font-weight: bold;
             color: #333;
+        }
+
+        .form-label .required-icon {
+            color: red;
+            margin-left: 2px;
         }
 
         .form-control {
@@ -73,10 +82,6 @@
             color: #333;
         }
 
-        .custom-control-input:checked ~ .custom-control-label::before {
-            background-color: #004ba0; /* Dark blue selected state */
-        }
-
         .footer {
             text-align: center;
             margin-top: 50px;
@@ -88,7 +93,11 @@
             color: #004ba0;
             text-decoration: none;
         }
-
+ #accountType {
+        width: auto;  /* Adjust width to fit content */
+        padding: 5px 10px;  /* Adjust padding to make the box smaller */
+        font-size: 16px;  /* Reduce font size for a smaller appearance */
+    }
         .footer a:hover {
             text-decoration: underline;
         }
@@ -107,13 +116,13 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="/">Home</a>
+                    <a class="nav-link" href="/"><i class="fas fa-home"></i> Home</a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">About</a>
+                    <a class="nav-link" href="/about"><i class="fas fa-info-circle"></i> About</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="contact.html">Contact</a>
+                    <a class="nav-link" href="/contact"><i class="fas fa-envelope"></i> Contact</a>
                 </li>
             </ul>
         </div>
@@ -121,26 +130,34 @@
 </nav>
 
 <div class="container mt-5">
-    <h2>Register New Account</h2>
+    <h2><i class="fas fa-user-plus"></i> Register New Account</h2>
     <div th:if="${error}" class="alert alert-danger">
         <span th:text="${error}"></span>
     </div>
 
     <form action="#" method="post" th:action="@{/account/save}" th:object="${account}">
         <div class="mb-3">
-            <label for="email" class="form-label">Account Holder Email</label>
-            <input  class="form-control" id="email" th:field="*{email}" required placeholder="example@domain.com" pattern="^[A-Za-z0-9+_.-]+@(.+)$">
+            <label for="email" class="form-label">Account Holder Email <span class="required-icon">*</span></label>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                </div>
+                <input class="form-control" id="email" th:field="*{email}" required placeholder="example@domain.com" pattern="^[A-Za-z0-9+_.-]+@(.+)$">
+            </div>
             <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}" style="color: red;"></div>
-
+        </div>
+        <div class="mb-3">
+            <label for="name" class="form-label">User Name <span class="required-icon">*</span></label>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fas fa-user"></i></span>
+                </div>
+                <input type="text" class="form-control" id="name" th:field="*{name}" required>
+            </div>
         </div>
 
         <div class="mb-3">
-            <label for="name" class="form-label">User Name</label>
-            <input type="text" class="form-control" id="name" th:field="*{name}" required>
-        </div>
-
-        <div class="mb-3">
-            <label class="form-label">Gender</label><br>
+            <label class="form-label">Gender <span class="required-icon">*</span></label><br>
             <div class="custom-control custom-radio custom-control-inline">
                 <input type="radio" id="male" th:field="*{gender}" value="Male" class="custom-control-input">
                 <label class="custom-control-label" for="male">Male</label>
@@ -152,8 +169,8 @@
         </div>
 
         <div class="mb-3">
-            <label for="accountType" class="form-label">Account Type</label>
-            <select class="form-control" id="accountType" th:field="*{accountType}" required>
+            <label for="accountType" class="form-label">Account Type <span class="required-icon">*</span></label>
+            <select class="form-control form-control-sm" id="accountType" th:field="*{accountType}" required>
                 <option value="" disabled selected>Select Account Type</option>
                 <option value="Savings">Savings</option>
                 <option value="Checking">Current</option>
@@ -162,7 +179,9 @@
             </select>
         </div>
 
-        <button type="submit" class="btn btn-primary">Create Account</button>
+        <button type="submit" class="btn btn-primary btn-sm">
+            <i class="fas fa-user-plus"></i> Create Account
+        </button>
     </form>
 </div>
 

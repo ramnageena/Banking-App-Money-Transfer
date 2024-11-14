@@ -27,7 +27,16 @@ public class BankUIController {
     public String homePage() {
         return "home";
     }
-
+    // Contact Page with Navigation
+    @GetMapping("/contact")
+    String getContact() {
+        return "contact";
+    }
+    // About Page with Navigation
+    @GetMapping("/about")
+    String getAbout() {
+        return "about";
+    }
     // Create New Account Page
     // Show the create account page
     @GetMapping("/account/create")

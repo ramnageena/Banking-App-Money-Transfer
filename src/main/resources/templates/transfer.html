@@ -5,47 +5,62 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Transfer Money</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <style>
         body {
-            background-color: #f8f9fa;
+            background-color: #f4f6f9;
             font-family: 'Arial', sans-serif;
         }
         .navbar {
             background-color: #005cbf;
         }
-         .navbar-brand img {
+        .navbar-brand img {
             height: 40px;
+        }
+        .navbar-nav .nav-item .nav-link {
+            color: #fff !important;
+            font-weight: 600;
+        }
+        .navbar-nav .nav-item .nav-link:hover {
+            color: #cce5ff !important;
         }
         .container h2 {
             color: #004ba0;
             font-weight: bold;
+            margin-top: 20px;
         }
         .card {
             margin-top: 20px;
             border: 1px solid #ddd;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
         }
         .card-header {
             background-color: #004ba0;
             color: white;
             font-weight: bold;
+            text-align: center;
         }
         .small-label {
             font-size: 0.85rem;
         }
-        .btn-success {
+        .btn-primary {
+            background-color: #005cbf;
+            border-color: #005cbf;
             font-size: 16px;
+            width: 10%;
         }
-
+        .btn-primary:hover {
+            background-color: #004ba0;
+            border-color: #004ba0;
+        }
         .footer {
             text-align: center;
             margin-top: 50px;
             font-size: 14px;
-            color: #777;
+            color: #555;
         }
-        /* Custom width for the deposit input box */
         .input-smaller {
-            max-width: 300px; /* Adjust this value to change the input width */
+            max-width: 300px;
         }
     </style>
 </head>
@@ -61,13 +76,13 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="/">Home</a>
+                    <a class="nav-link" href="/"><i class="fas fa-home"></i> Home</a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">About</a>
+                    <a class="nav-link" href="/about"><i class="fas fa-info-circle"></i> About</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="contact.html">Contact</a>
+                    <a class="nav-link" href="/contact"><i class="fas fa-envelope"></i> Contact</a>
                 </li>
             </ul>
         </div>
@@ -88,12 +103,12 @@
     <!-- Account Details and Transfer Form in One Card -->
     <div class="card">
         <div class="card-header">
-            Account Details and Transfer Money
+            <i class="fas fa-university"></i> Account Details and Transfer Money
         </div>
         <div class="card-body">
             <!-- Account Details -->
             <table class="table table-bordered mb-4">
-                <thead>
+                <thead class="thead-light">
                 <tr>
                     <th>Account Number</th>
                     <th>Account Holder Name</th>
@@ -115,21 +130,20 @@
 
                 <!-- To Account Number -->
                 <div class="form-group">
-                    <label class="small-label" ><strong>To Account Number:</strong></label>
+                    <label class="small-label"><strong>To Account Number:</strong></label>
                     <input type="number" name="toAccountNumber" class="form-control form-control-sm input-smaller" required/>
                 </div>
 
                 <!-- Amount -->
                 <div class="form-group">
-                    <strong class="small-label" >Amount:</strong>
-                    <input type="number" name="amount"  class="form-control form-control-sm input-smaller" required/>
+                    <strong class="small-label">Amount:</strong>
+                    <input type="number" name="amount" class="form-control form-control-sm input-smaller" required/>
                 </div>
 
-                <button type="submit" class="btn btn-primary">Transfer</button>
+                <button type="submit" class="btn btn-primary"><i class="fas fa-paper-plane"></i> Transfer</button>
             </form>
         </div>
     </div>
-
 </div>
 
 <div class="footer">

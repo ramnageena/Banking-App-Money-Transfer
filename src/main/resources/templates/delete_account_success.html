@@ -102,13 +102,13 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="/">Home</a>
+                    <a class="nav-link" href="/"><i class="fas fa-home"></i> Home</a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">About</a>
+                    <a class="nav-link" href="#"><i class="fas fa-info-circle"></i> About</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="contact.html">Contact</a>
+                    <a class="nav-link" href="contact.html"><i class="fas fa-envelope"></i> Contact</a>
                 </li>
             </ul>
         </div>
@@ -120,12 +120,12 @@
     <i class="fas fa-check-circle success-icon"></i>
     <div class="success-message">Account Deleted Successfully</div>
     <div class="account-info"><strong>Account Number:</strong> <span th:text="${accountNumber}"></span></div>
-    <a th:href="@{/}" class="btn btn-primary mt-3">Back to Home</a>
+    <a th:href="@{/}" class="btn btn-primary mt-3"><i class="fas fa-arrow-left"></i> Back to Home</a>
 </div>
 
 <!-- Footer -->
 <div class="footer">
-    <p>&copy; 2024 Citi Bank | <a href="#">Privacy Policy</a> | <a href="#">Terms & Conditions</a></p>
+    <p>&copy; 2024 Citi Bank | <a href="#"><i class="fas fa-user-shield"></i> Privacy Policy</a> | <a href="#"><i class="fas fa-file-contract"></i> Terms & Conditions</a></p>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
