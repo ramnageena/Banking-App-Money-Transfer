@@ -31,6 +31,7 @@ public class BankUIController {
     @GetMapping("/account/create")
     public String showCreateAccountForm(Model model) {
         model.addAttribute("account", new Account());
+        model.addAttribute("message", "Account created successfully!");
         return "createAccount";
     }
 
@@ -53,6 +54,7 @@ public class BankUIController {
             return "account-not-found"; // Error page if account is not found
         }
         model.addAttribute("account", account);
+        model.addAttribute("message", "Amount transfer to account : "+account.getAccountNumber()+ " : Successfully !!");
         return "view_account"; // Template for viewing account details
     }
 
@@ -64,20 +66,6 @@ public class BankUIController {
     }
 
 
-//    // Validate the account number and name, then show account details if valid
-//    @PostMapping("/account/validate")
-//    public String validateAccount(Account account, Model model) {
-//        Account foundAccount = accountService.viewAccount(account.getAccountNumber());
-//
-//        if (foundAccount != null) {
-//            model.addAttribute("account", foundAccount);
-//            return "view_account"; // Show account details page if found
-//        } else {
-//            model.addAttribute("error", "Account number and name do not match.");
-//            return "view_account_form"; // Return back to the form with an error message
-//        }
-//    }
-
     @PostMapping("/account/validate")
     public String validateLogin(@ModelAttribute LoginRequest loginRequest, Model model) {
         Account account = accountService.viewAccount(loginRequest.getAccountNumber());
@@ -85,6 +73,7 @@ public class BankUIController {
         // Check if account exists and name matches
         if (account != null && account.getName().equalsIgnoreCase(loginRequest.getName())) {
             model.addAttribute("account", account);
+            model.addAttribute("message", "User logged  in successfully!!!");
             return "view_account"; // Navigate to account details page if login is successful
         } else {
             model.addAttribute("error", "Account number and Name do not matched.");
@@ -99,6 +88,7 @@ public class BankUIController {
         try {
             if (deleted) {
                 model.addAttribute("accountNumber", accountNumber);
+                model.addAttribute("message", "Account deleted successfully.");
                 return "delete_account_success";
             } else {
                 model.addAttribute("errorMessage", "User not found with Account Number: " + accountNumber);
