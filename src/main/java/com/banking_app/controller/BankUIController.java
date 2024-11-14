@@ -5,9 +5,11 @@ import com.banking_app.dto.TransferRequest;
 import com.banking_app.dto.WithDrawRequest;
 import com.banking_app.entity.Account;
 import com.banking_app.service.AccountService;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -37,10 +39,19 @@ public class BankUIController {
 
     // Handle account creation
     @PostMapping("/account/save")
-    public String createAccount(Account account, Model model) {
+    public String createAccount(@Valid @ModelAttribute("account")Account account, BindingResult bindingResult, Model model) {
+        // Check if email is unique
+        if (accountService.emailExists(account.getEmail())) {
+            bindingResult.rejectValue("email", "error.account", "This email address is already in use. Please try a different one.!!");
+        }
+
+        if (bindingResult.hasErrors()) {
+            return "createAccount"; // Return to form with error
+        }
+
         Account createdAccount = accountService.createAccount(account);
         model.addAttribute("account", createdAccount);
-        return "account_details";
+        return "account_details"; // Show account details page after creation
     }
 
     // Account Details Page - Requires Account Number

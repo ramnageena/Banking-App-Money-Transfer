@@ -47,8 +47,8 @@
         }
 
         .container h2 {
-            color: #004ba0; /* Dark blue header color */
-            font-size: 24px; /* Reduced header size */
+            color: #004ba0;
+            font-size: 24px;
             margin-bottom: 20px;
             font-weight: bold;
         }
@@ -77,23 +77,6 @@
             background-color: #004ba0; /* Dark blue selected state */
         }
 
-        .btn-primary {
-            background-color: #004ba0; /* Dark blue button */
-            border-color: #004ba0;
-            padding: 12px 50px;
-            font-size: 18px;
-            border-radius: 4px;
-        }
-
-        .btn-primary:hover {
-            background-color: #003b8c; /* Darker shade on hover */
-            border-color: #003b8c;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
         .footer {
             text-align: center;
             margin-top: 50px;
@@ -117,7 +100,6 @@
         <img src="/images/citi-logo.jpg" alt="Citi Logo">
     </a>
     <div class="container">
-
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -137,20 +119,26 @@
         </div>
     </div>
 </nav>
+
 <div class="container mt-5">
     <h2>Register New Account</h2>
+    <div th:if="${error}" class="alert alert-danger">
+        <span th:text="${error}"></span>
+    </div>
+
     <form action="#" method="post" th:action="@{/account/save}" th:object="${account}">
         <div class="mb-3">
-            <label for="name" class="form-label">Account Holder Email</label>
-            <input type="email" class="form-control" id="amount" th:field="*{email}" required>
+            <label for="email" class="form-label">Account Holder Email</label>
+            <input  class="form-control" id="email" th:field="*{email}" required placeholder="example@domain.com" pattern="^[A-Za-z0-9+_.-]+@(.+)$">
+            <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}" style="color: red;"></div>
+
         </div>
+
         <div class="mb-3">
             <label for="name" class="form-label">User Name</label>
             <input type="text" class="form-control" id="name" th:field="*{name}" required>
         </div>
 
-
-        <!-- Gender Field with Radio Buttons -->
         <div class="mb-3">
             <label class="form-label">Gender</label><br>
             <div class="custom-control custom-radio custom-control-inline">
@@ -163,7 +151,6 @@
             </div>
         </div>
 
-        <!-- Account Type Dropdown -->
         <div class="mb-3">
             <label for="accountType" class="form-label">Account Type</label>
             <select class="form-control" id="accountType" th:field="*{accountType}" required>
@@ -171,7 +158,7 @@
                 <option value="Savings">Savings</option>
                 <option value="Checking">Current</option>
                 <option value="Business">Business</option>
-                <option value="Business">Salary</option>
+                <option value="Salary">Salary</option>
             </select>
         </div>
 

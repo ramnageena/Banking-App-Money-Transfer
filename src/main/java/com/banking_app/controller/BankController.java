@@ -7,6 +7,7 @@ import com.banking_app.entity.Account;
 import com.banking_app.exception.AccountNotFoundException;
 import com.banking_app.exception.InsufficientException;
 import com.banking_app.service.AccountService;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -24,7 +25,7 @@ public class BankController {
     private final AccountService accountService;
 
     @PostMapping("/create")
-    public ResponseEntity<Account> createAccount( @RequestBody Account account) {
+    public ResponseEntity<Account> createAccount( @Valid @RequestBody Account account) {
         try {
             Account createdAccount = accountService.createAccount(account);
             log.info("New account created successfully with Account Number: {}", createdAccount.getAccountNumber());
@@ -50,7 +51,7 @@ public class BankController {
     @PutMapping("/withdraw/{accountNumber}")
     public ResponseEntity<Account> withDrawAmount(
             @PathVariable Long accountNumber,
-            @RequestBody WithDrawRequest request) {
+            @Valid @RequestBody WithDrawRequest request) {
         try {
             Account updatedAccount = accountService.withDrawAmount(accountNumber, request.getAmount());
             log.info("Amount withdrawn successfully from Account Number: {}, New Balance: {}", accountNumber, updatedAccount.getBalance());

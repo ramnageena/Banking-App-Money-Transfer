@@ -13,4 +13,5 @@ public interface AccountService {
     Account viewAccount(Long accountNumber);
     void transferMoney(Long fromAccountNumber,Long toAccountNumber,Long amount);
     Account viewAccount(Long accountNumber,String accountHolderName);
+    boolean emailExists(String email);
 }

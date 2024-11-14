@@ -2,6 +2,7 @@ package com.banking_app.service.impl;
 
 import com.banking_app.Repository.AccountRepository;
 import com.banking_app.entity.Account;
+import com.banking_app.exception.AccountAlreadyExist;
 import com.banking_app.exception.AccountNotFoundException;
 import com.banking_app.exception.InsufficientException;
 import com.banking_app.service.AccountService;
@@ -24,6 +25,9 @@ public class AccountServiceImpl implements AccountService {
     @Override
     @Transactional
     public Account createAccount(Account account) {
+        if (accountRepository.existsByEmail(account.getEmail())) {
+            throw new AccountAlreadyExist("Account is already is exists with email :" + account.getEmail());
+        }
         account.setAccountNumber(BankingUtils.random());
         Account savedAccount = accountRepository.save(account);
         log.info("Account created with Account Number: {}", savedAccount.getAccountNumber());
@@ -47,7 +51,7 @@ public class AccountServiceImpl implements AccountService {
             throw new InsufficientException("Insufficient balance");
         }
 
-        account.setBalance(account.getBalance()-amount);
+        account.setBalance(account.getBalance() - amount);
         log.info("Withdrawal successful, new balance for Account Number {}: {}", accountNumber, account.getBalance());
         return accountRepository.save(account);
     }
@@ -79,19 +83,19 @@ public class AccountServiceImpl implements AccountService {
     }
 
 
-
-
     @Override
     public Account viewAccount(Long accountNumber) {
         log.info("Account getting, Account Number: {}", accountNumber);
         return accountRepository.findByAccountNumber(accountNumber);
     }
+
     @Override
     public Account viewAccount(Long accountNumber, String accountHolderName) {
         log.info("Fetching account with Account Number: {} and Account Holder Name: {}", accountNumber, accountHolderName);
         return accountRepository.findByAccountNumberAndName(accountNumber, accountHolderName)
                 .orElseThrow(() -> new AccountNotFoundException("Account not found with account number: " + accountNumber + " and account holder name: " + accountHolderName));
     }
+
     @Transactional
     @Override
     public void transferMoney(Long fromAccountNumber, Long toAccountNumber, Long amount) {
@@ -128,6 +132,11 @@ public class AccountServiceImpl implements AccountService {
         log.info("Money transfer from account: {} to account: {} completed successfully", fromAccountNumber, toAccountNumber);
     }
 
+    // Check if email exists
+    @Override
+    public boolean emailExists(String email) {
+        return accountRepository.findByEmail(email).isPresent();
+    }
 
 
 }
