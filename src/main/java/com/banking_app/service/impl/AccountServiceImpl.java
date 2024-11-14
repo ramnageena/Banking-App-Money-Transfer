@@ -42,7 +42,6 @@ public class AccountServiceImpl implements AccountService {
     public Account withDrawAmount(Long accountNumber, Long amount) {
         Account account = accountRepository.findByAccountNumber(accountNumber);
         log.info("Processing withdrawal for Account Number: {}", accountNumber);
-
         if (account.getBalance() < amount) {
             log.error("Insufficient funds for Account Number: {}", accountNumber);
             throw new InsufficientException("Insufficient balance");
@@ -58,7 +57,6 @@ public class AccountServiceImpl implements AccountService {
     public Account depositAmount(Long accountNumber, Long amount) {
         Account account = accountRepository.findByAccountNumber(accountNumber);
         log.info("Processing deposit for Account Number: {}", accountNumber);
-
         account.setBalance(account.getBalance() + amount);
         log.info("Deposit successful, new balance for Account Number {}: {}", accountNumber, account.getBalance());
         return accountRepository.save(account);
@@ -87,6 +85,12 @@ public class AccountServiceImpl implements AccountService {
     public Account viewAccount(Long accountNumber) {
         log.info("Account getting, Account Number: {}", accountNumber);
         return accountRepository.findByAccountNumber(accountNumber);
+    }
+    @Override
+    public Account viewAccount(Long accountNumber, String accountHolderName) {
+        log.info("Fetching account with Account Number: {} and Account Holder Name: {}", accountNumber, accountHolderName);
+        return accountRepository.findByAccountNumberAndName(accountNumber, accountHolderName)
+                .orElseThrow(() -> new AccountNotFoundException("Account not found with account number: " + accountNumber + " and account holder name: " + accountHolderName));
     }
     @Transactional
     @Override
@@ -123,5 +127,7 @@ public class AccountServiceImpl implements AccountService {
 
         log.info("Money transfer from account: {} to account: {} completed successfully", fromAccountNumber, toAccountNumber);
     }
+
+
 
 }

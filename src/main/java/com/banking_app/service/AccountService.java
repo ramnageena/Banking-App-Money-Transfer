@@ -12,4 +12,5 @@ public interface AccountService {
     boolean deleteAccount(Long accountNumber);
     Account viewAccount(Long accountNumber);
     void transferMoney(Long fromAccountNumber,Long toAccountNumber,Long amount);
+    Account viewAccount(Long accountNumber,String accountHolderName);
 }

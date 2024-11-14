@@ -1,5 +1,6 @@
 package com.banking_app.controller;
 
+import com.banking_app.dto.LoginRequest;
 import com.banking_app.dto.TransferRequest;
 import com.banking_app.dto.WithDrawRequest;
 import com.banking_app.entity.Account;
@@ -58,23 +59,39 @@ public class BankUIController {
 
     @GetMapping("/account/view-form")
     public String showViewAccountForm(Model model) {
-        model.addAttribute("account", new Account()); // Empty account object to bind form fields
+        model.addAttribute("account",new LoginRequest()); // Empty account object to bind form fields
         return "view_account_form"; // Return the view_account_form.html page
     }
 
-    // Validate the account number and name, then show account details if valid
-    @PostMapping("/account/validate")
-    public String validateAccount(Account account, Model model) {
-        Account foundAccount = accountService.viewAccount(account.getAccountNumber());
 
-        if (foundAccount != null) {
-            model.addAttribute("account", foundAccount);
-            return "view_account"; // Show account details page if found
+//    // Validate the account number and name, then show account details if valid
+//    @PostMapping("/account/validate")
+//    public String validateAccount(Account account, Model model) {
+//        Account foundAccount = accountService.viewAccount(account.getAccountNumber());
+//
+//        if (foundAccount != null) {
+//            model.addAttribute("account", foundAccount);
+//            return "view_account"; // Show account details page if found
+//        } else {
+//            model.addAttribute("error", "Account number and name do not match.");
+//            return "view_account_form"; // Return back to the form with an error message
+//        }
+//    }
+
+    @PostMapping("/account/validate")
+    public String validateLogin(@ModelAttribute LoginRequest loginRequest, Model model) {
+        Account account = accountService.viewAccount(loginRequest.getAccountNumber());
+
+        // Check if account exists and name matches
+        if (account != null && account.getName().equalsIgnoreCase(loginRequest.getName())) {
+            model.addAttribute("account", account);
+            return "view_account"; // Navigate to account details page if login is successful
         } else {
-            model.addAttribute("error", "Account number and name do not match.");
-            return "view_account_form"; // Return back to the form with an error message
+            model.addAttribute("error", "Account number and Name do not matched.");
+            return "view_account_form"; // Stay on login page with error message
         }
     }
+
 
     @PostMapping("/account/delete/{accountNumber}")
     public String deleteAccount(@PathVariable("accountNumber") Long accountNumber, Model model) {

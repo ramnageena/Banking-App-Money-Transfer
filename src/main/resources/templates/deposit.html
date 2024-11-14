@@ -111,7 +111,7 @@
             <!-- Deposit Form -->
             <form th:action="@{/account/deposit/{accountNumber}(accountNumber=${account.accountNumber})}" method="post">
                 <div class="form-group">
-                    <label for="amount" class="small-label">Amount to Deposit</label>
+                    <strong for="amount" class="small-label">Amount to Deposit</strong>
                     <input type="number" id="amount" name="amount" class="form-control form-control-sm input-smaller" required />
                 </div>
                 <button type="submit" class="btn btn-success">Deposit</button>
