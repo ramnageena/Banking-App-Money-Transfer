@@ -36,7 +36,15 @@ public class BankUIController {
     @GetMapping("/about")
     String getAbout() {
         return "about";
+
     }
+    @GetMapping("/logout")
+    public String logout(Model model) {
+        // Perform any necessary cleanup here if needed
+        model.addAttribute("message", "You have been logged out successfully!");
+        return "logout"; // Redirect to the logout page
+    }
+
     // Create New Account Page
     // Show the create account page
     @GetMapping("/account/create")
