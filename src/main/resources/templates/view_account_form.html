@@ -8,19 +8,29 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 
     <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f8f9fa; /* Light gray background for the page */
-            color: #333;
-        }
+        body, html {
+               margin: 0;
+               padding: 0;
+               height: 100%;
+               display: flex;
+               flex-direction: column;
+           }
+
+           body {
+            background: linear-gradient(135deg, #f3f4f6, #b7d9f888,#f3f4f6);
+   <!--          background: linear-gradient(135deg, #e0f7fa, #80deea); b3d9f2 its a light blue color-->
+   <!--  background: linear-gradient(135deg, #f3f4f6, #e5e5e5); -->
+   <!--  background: linear-gradient(135deg, #b3d9f2, #e5e5e5);-->
+               font-family: 'Arial', sans-serif;
+           }
 
         .navbar {
             background-color: #005cbf; /* Dark blue background */
-            padding: 8px 0; /* Reduced padding for a smaller header */
+            padding: 10px 20px;
         }
 
         .navbar-brand img {
-            height: 40px; /* Adjusted logo size */
+            height: 50px; /* Adjusted logo size */
         }
 
         .navbar-nav .nav-item .nav-link {
@@ -31,38 +41,33 @@
         .navbar-nav .nav-item .nav-link:hover {
             color: #ffd700;
         }
-      .btn-primary {
-    background-color: #004ba0;
-    border-color: #004ba0;
-    padding: 12px 50px;
-    font-size: 18px;
-    border-radius: 4px;
-    margin-bottom: 15px; /* Add margin-bottom for space */
-}
+
         .container {
-<!--            background-color: #ffffff; /* White background for form */-->
-            padding: 50px;
-            border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            max-width: 600px;
-            margin-top: 30px;
+            background-color: #ffffff; /* White background for form */
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+            max-width: 500px;
+            margin: 50px auto;
         }
 
         .container h2 {
             color: #004ba0; /* Dark blue header color */
-            font-size: 24px; /* Reduced header size */
+            font-size: 24px;
             margin-bottom: 20px;
             font-weight: bold;
+            text-align: center;
         }
 
         .form-label {
             font-weight: bold;
-            color: #333;
+            color: #555;
         }
 
         .form-control {
             border-radius: 4px;
             border: 1px solid #ccc;
+            padding: 10px 12px;
         }
 
         .form-control:focus {
@@ -70,25 +75,17 @@
             box-shadow: 0 0 0 0.2rem rgba(0, 75, 160, 0.25);
         }
 
-        .custom-control-label {
-            font-size: 16px;
-            color: #333;
-        }
-
-        .custom-control-input:checked ~ .custom-control-label::before {
-            background-color: #004ba0; /* Dark blue selected state */
-        }
-
-        .btn-primary {
-            background-color: #004ba0; /* Dark blue button */
-            border-color: #004ba0;
-            padding: 12px 50px;
-            font-size: 18px;
-            border-radius: 4px;
-        }
-
+       .btn-primary {
+               background-color: #004ba0;
+               border-color: #004ba0;
+               padding: 10px 30px;
+               font-size: 15px;
+               border-radius: 4px;
+               margin-bottom: 20px;
+               margin-top: 15px;
+           }
         .btn-primary:hover {
-            background-color: #003b8c; /* Darker shade on hover */
+            background-color: #003b8c;
             border-color: #003b8c;
         }
 
@@ -96,30 +93,70 @@
             margin-bottom: 20px;
         }
 
-        .footer {
-            text-align: center;
-            margin-top: 50px;
-            font-size: 14px;
+
+
+         /* Footer Styling */
+           .footer {
+               text-align: center;
+               padding: 3px;
+               background: #004ba0;
+               color: white;
+               font-size: 13px;
+               margin-bottom: 0px;
+               margin-top: 200px
+           }
+
+           .footer a {
+               color: #ffeb3b;
+               text-decoration: none;
+               font-weight: bold;
+           }
+
+           .footer a:hover {
+               text-decoration: underline;
+           }
+            /* Flexbox to push footer at the bottom */
+           .wrapper {
+               display: flex;
+               flex-direction: column;
+               height: 100%;
+           }
+
+        .input-icon {
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
             color: #777;
         }
 
-        .footer a {
-            color: #004ba0;
-            text-decoration: none;
+        .input-container {
+            position: relative;
         }
-
-        .footer a:hover {
-            text-decoration: underline;
+.card-body {
+               background: white;
+               padding: 20px;
+               border-radius: 0 0 15px 15px;
+           }
+           .card-header {
+            background: #004ba0;
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            text-align: center;
+            border-radius: 15px 15px 0 0;
+        }
+        .form-control {
+            padding-left: 40px;
         }
     </style>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #005cbf;">
+<nav class="navbar navbar-expand-lg navbar-dark">
     <a class="navbar-brand" href="#">
-        <img src="/images/citi-logo.jpg" alt="Citi Logo" style="height: 50px;">
+        <img src="/images/citi-logo.jpg" alt="Citi Logo">
     </a>
-    <div class="container">
-
+    <div class="container-fluid">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -128,7 +165,7 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/"><i class="fas fa-home"></i> Home</a>
                 </li>
-                <li class="nav-item active">
+                <li class="nav-item">
                     <a class="nav-link" href="/about"><i class="fas fa-info-circle"></i> About</a>
                 </li>
                 <li class="nav-item">
@@ -139,22 +176,31 @@
     </div>
 </nav>
 
-<div class="container mt-5">
-    <h2>Login Your Account</h2>
+<div class="container">
+    <div class="card-header">
+        <i class="fas fa-user-circle"></i> Login Your Account
+    </div>
     <div th:if="${error}" class="alert alert-danger">
         <span th:text="${error}"></span>
     </div>
+    <div class="card-body">
     <form action="/account/validate" method="post">
-        <div class="mb-3">
-            <label for="accountNumber" class="form-label">Account Number</label>
-            <input type="text" class="form-control" id="accountNumber" name="accountNumber" required>
+        <div class="mb-3 input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text"><i class="fas fa-hashtag"></i></span>
+            </div>
+            <input type="text" class="form-control" id="accountNumber" name="accountNumber" placeholder="Account Number" required>
         </div>
-        <div class="mb-3">
-            <label for="name" class="form-label">Account Holder Name</label>
-            <input type="text" class="form-control" id="name" name="name" required>
+        <div class="mb-3 input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text"><i class="fas fa-user"></i></span>
+            </div>
+            <input type="text" class="form-control" id="name" name="name" placeholder="Account Holder Name" required>
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary w-10"><i class="fas fa-paper-plane"></i> Submit</button>
     </form>
+
+</div>
 </div>
 
 <div class="footer">
