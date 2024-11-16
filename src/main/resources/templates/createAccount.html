@@ -7,100 +7,139 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f8f9fa;
-            color: #333;
-        }
+        body, html {
+               margin: 0;
+               padding: 0;
+               height: 100%;
+               display: flex;
+               flex-direction: column;
+           }
 
-        .navbar {
-            background-color: #005cbf;
-            padding: 8px 0;
-        }
+           body {
+            background: linear-gradient(135deg, #f3f4f6, #b7d9f888,#f3f4f6);
+   <!--          background: linear-gradient(135deg, #e0f7fa, #80deea); b3d9f2 its a light blue color-->
+   <!--  background: linear-gradient(135deg, #f3f4f6, #e5e5e5); -->
+   <!--  background: linear-gradient(135deg, #b3d9f2, #e5e5e5);-->
+               font-family: 'Arial', sans-serif;
+           }
 
-        .navbar-brand img {
-            height: 40px;
-        }
 
-        .navbar-nav .nav-item .nav-link {
+           .navbar {
+               background-color: #005cbf;
+               padding: 8px 0;
+           }
+
+           .navbar-brand img {
+               height: 40px;
+           }
+
+           .navbar-nav .nav-item .nav-link {
+               color: white;
+               font-size: 16px;
+           }
+
+           .navbar-nav .nav-item .nav-link:hover {
+               color: #ffd700;
+           }
+
+           .btn-primary {
+               background-color: #004ba0;
+               border-color: #004ba0;
+               padding: 10px 30px;
+               font-size: 15px;
+               border-radius: 4px;
+               margin-bottom: 20px;
+               margin-top: 15px;
+           }
+
+               .container {
+               /* Pushes the footer to the bottom */
+   <!--            background-color: #ffffff; /* White background for form */-->
+               padding: 50px;
+<!--               border-radius: 8px;-->
+               box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+               max-width: 600px;
+               margin-top: 30px;
+           }
+   .card-body {
+               background: white;
+               padding: 20px;
+               border-radius: 0 0 15px 15px;
+           }
+           .card-header {
+            background: #004ba0;
             color: white;
-            font-size: 16px;
-        }
-
-        .navbar-nav .nav-item .nav-link:hover {
-            color: #ffd700;
-        }
-
-        .btn-primary {
-            background-color: #004ba0;
-            border-color: #004ba0;
-            padding: 10px 30px;
-            font-size: 15px;
-            border-radius: 4px;
-            margin-bottom: 20px;
-            margin-top: 15px;
-        }
-
-            .container {
-<!--            background-color: #ffffff; /* White background for form */-->
-            padding: 50px;
-            border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            max-width: 600px;
-            margin-top: 30px;
-        }
-
-       .container h2 {
-            color: #004ba0;
-            font-size: 24px;
-            margin-bottom: 20px;
+            font-size: 18px;
             font-weight: bold;
-        }
-
-        .form-label {
-            font-weight: bold;
-            color: #333;
-        }
-
-        .form-label .required-icon {
-            color: red;
-            margin-left: 2px;
-        }
-
-        .form-control {
-            border-radius: 4px;
-            border: 1px solid #ccc;
-        }
-
-        .form-control:focus {
-            border-color: #004ba0;
-            box-shadow: 0 0 0 0.2rem rgba(0, 75, 160, 0.25);
-        }
-
-        .custom-control-label {
-            font-size: 16px;
-            color: #333;
-        }
-
-        .footer {
             text-align: center;
-            margin-top: 50px;
-            font-size: 14px;
-            color: #777;
+            border-radius: 15px 15px 0 0;
         }
+          .container h2 {
+               color: #004ba0;
+               font-size: 24px;
+               margin-bottom: 20px;
+               font-weight: bold;
+           }
 
-        .footer a {
-            color: #004ba0;
-            text-decoration: none;
-        }
- #accountType {
-        width: auto;  /* Adjust width to fit content */
-        padding: 5px 10px;  /* Adjust padding to make the box smaller */
-        font-size: 16px;  /* Reduce font size for a smaller appearance */
-    }
-        .footer a:hover {
-            text-decoration: underline;
-        }
+           .form-label {
+               font-weight: bold;
+               color: #333;
+           }
+
+           .form-label .required-icon {
+               color: red;
+               margin-left: 2px;
+           }
+
+           .form-control {
+               border-radius: 4px;
+               border: 1px solid #ccc;
+           }
+
+           .form-control:focus {
+               border-color: #004ba0;
+               box-shadow: 0 0 0 0.2rem rgba(0, 75, 160, 0.25);
+           }
+
+           .custom-control-label {
+               font-size: 16px;
+               color: #333;
+           }
+           #accountType {
+           width: auto;  /* Adjust width to fit content */
+           padding: 5px 10px;  /* Adjust padding to make the box smaller */
+           font-size: 16px;  /* Reduce font size for a smaller appearance */
+       }
+
+         /* Footer Styling */
+           .footer {
+               text-align: center;
+               padding: 3px;
+               background: #004ba0;
+               color: white;
+               font-size: 13px;
+               margin-bottom: 0;
+               margin-top: 65px
+           }
+
+           .footer a {
+               color: #ffeb3b;
+               text-decoration: none;
+               font-weight: bold;
+           }
+
+           .footer a:hover {
+               text-decoration: underline;
+           }
+            /* Flexbox to push footer at the bottom */
+           .wrapper {
+               display: flex;
+               flex-direction: column;
+               height: 100%;
+           }
+
+
+
     </style>
 </head>
 <body>
@@ -130,60 +169,66 @@
 </nav>
 
 <div class="container mt-5">
-    <h2><i class="fas fa-user-plus"></i> Register New Account</h2>
+
     <div th:if="${error}" class="alert alert-danger">
         <span th:text="${error}"></span>
     </div>
+    <div class="card-header">
+        <i class="fas fa-user-circle"></i> Register New Account
+    </div>
 
-    <form action="#" method="post" th:action="@{/account/save}" th:object="${account}">
-        <div class="mb-3">
-            <label for="email" class="form-label">Account Holder Email <span class="required-icon">*</span></label>
-            <div class="input-group">
-                <div class="input-group-prepend">
-                    <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+    <div class="card-body">
+        <form action="#" method="post" th:action="@{/account/save}" th:object="${account}">
+            <div class="mb-3">
+                <label for="email" class="form-label">Account Holder Email <span class="required-icon">*</span></label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                    </div>
+                    <input class="form-control" id="email" th:field="*{email}" required placeholder="example@domain.com" pattern="^[A-Za-z0-9+_.-]+@(.+)$">
                 </div>
-                <input class="form-control" id="email" th:field="*{email}" required placeholder="example@domain.com" pattern="^[A-Za-z0-9+_.-]+@(.+)$">
+                <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}" style="color: red;"></div>
             </div>
-            <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}" style="color: red;"></div>
-        </div>
-        <div class="mb-3">
-            <label for="name" class="form-label">User Name <span class="required-icon">*</span></label>
-            <div class="input-group">
-                <div class="input-group-prepend">
-                    <span class="input-group-text"><i class="fas fa-user"></i></span>
+            <div class="mb-3">
+                <label for="name" class="form-label">Account Holder Name <span class="required-icon">*</span></label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fas fa-user"></i></span>
+                    </div>
+                    <input type="text" class="form-control" id="name" th:field="*{name}" required placeholder="Enter your name">
                 </div>
-                <input type="text" class="form-control" id="name" th:field="*{name}" required>
             </div>
-        </div>
 
-        <div class="mb-3">
-            <label class="form-label">Gender <span class="required-icon">*</span></label><br>
-            <div class="custom-control custom-radio custom-control-inline">
-                <input type="radio" id="male" th:field="*{gender}" value="Male" class="custom-control-input">
-                <label class="custom-control-label" for="male">Male</label>
+            <div class="mb-3">
+                <label class="form-label">Gender <span class="required-icon">*</span></label><br>
+                <div class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" id="male" th:field="*{gender}" value="Male" class="custom-control-input">
+                    <label class="custom-control-label" for="male">Male</label>
+                </div>
+                <div class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" id="female" th:field="*{gender}" value="Female" class="custom-control-input">
+                    <label class="custom-control-label" for="female">Female</label>
+                </div>
             </div>
-            <div class="custom-control custom-radio custom-control-inline">
-                <input type="radio" id="female" th:field="*{gender}" value="Female" class="custom-control-input">
-                <label class="custom-control-label" for="female">Female</label>
+
+            <div class="mb-3">
+                <label for="accountType" class="form-label">Account Type <span class="required-icon">*</span></label>
+                <select class="form-control form-control-sm" id="accountType" th:field="*{accountType}" required>
+                    <option value="" disabled selected>Select Account Type</option>
+                    <option value="Savings">Savings</option>
+                    <option value="Checking">Current</option>
+                    <option value="Business">Business</option>
+                    <option value="Salary">Salary</option>
+                </select>
             </div>
-        </div>
 
-        <div class="mb-3">
-            <label for="accountType" class="form-label">Account Type <span class="required-icon">*</span></label>
-            <select class="form-control form-control-sm" id="accountType" th:field="*{accountType}" required>
-                <option value="" disabled selected>Select Account Type</option>
-                <option value="Savings">Savings</option>
-                <option value="Checking">Current</option>
-                <option value="Business">Business</option>
-                <option value="Salary">Salary</option>
-            </select>
-        </div>
+            <button type="submit" class="btn btn-primary btn-sm">
+                <i class="fas fa-user-plus"></i> Create Account
+            </button>
+        </form>
+    </div>
+    </div>
 
-        <button type="submit" class="btn btn-primary btn-sm">
-            <i class="fas fa-user-plus"></i> Create Account
-        </button>
-    </form>
-</div>
 
 <div class="footer">
     <p>&copy; 2024 Citi Bank | <a href="#">Privacy Policy</a> | <a href="#">Terms & Conditions</a></p>
