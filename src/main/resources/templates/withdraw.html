@@ -5,52 +5,106 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Withdraw Money</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
         body {
-            background-color: #f8f9fa;
+         background: linear-gradient(135deg, #f3f4f6, #b7d9f888,#f3f4f6);
+<!--          background: linear-gradient(135deg, #e0f7fa, #80deea); b3d9f2 its a light blue color-->
+<!--  background: linear-gradient(135deg, #f3f4f6, #e5e5e5); -->
+<!--  background: linear-gradient(135deg, #b3d9f2, #e5e5e5);-->
             font-family: 'Arial', sans-serif;
         }
+
+        /* Navbar Styling */
         .navbar {
             background-color: #005cbf;
+            padding: 15px 0;
         }
-         .navbar-brand img {
-            height: 40px;
+
+        .navbar-brand img {
+            height: 50px;
         }
+
+        .navbar-nav .nav-link {
+            color: white !important;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: #004ba0 !important;
+        }
+
+        /* Main Content Styling */
+        .container {
+            flex: 1; /* Pushes the footer to the bottom */
+            padding: 20px;
+        }
+
         .container h2 {
             color: #004ba0;
             font-weight: bold;
-        }
-        .card {
-            margin-top: 20px;
-            border: 1px solid #ddd;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-        .card-header {
-            background-color: #004ba0;
-            color: white;
-            font-weight: bold;
-        }
-        .small-label {
-            font-size: 0.85rem;
-        }
-        .btn-success {
-            font-size: 16px;
-        }
-         .footer {
             text-align: center;
-            margin-top: 50px;
+            margin-bottom: 30px;
+            font-size: 26px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+        }
+
+        .card {
+            margin: 20px auto;
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+            max-width: 700px;
+        }
+
+        .card-header {
+            background: #004ba0;
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            text-align: center;
+            border-radius: 15px 15px 0 0;
+        }
+
+        .card-body {
+            background: white;
+            padding: 20px;
+            border-radius: 0 0 15px 15px;
+        }
+
+        /* Footer Styling */
+        .footer {
+            text-align: center;
+            padding: 2px 0;
+            background: #005cbf;
+            color: white;
             font-size: 14px;
-            color: #777;
         }
 
         .footer a {
-            color: #004ba0;
+            color: #ffeb3b;
             text-decoration: none;
+            font-weight: bold;
         }
-        /* Custom width for the withdraw input box */
-        .input-smaller {
-            max-width: 300px; /* Adjust this value to change the input width */
+
+        .footer a:hover {
+            text-decoration: underline;
         }
+        .small-label {
+           font-size: 0.85rem;
+       }
+       .input-smaller {
+           max-width: 300px; /* Adjust this value to change the input width */
+       }
     </style>
 </head>
 <body>
@@ -59,9 +113,6 @@
         <a class="navbar-brand" href="#">
             <img src="/images/citi-logo.jpg" alt="Citi Logo">
         </a>
-    </div>
-    <div class="container">
-
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -69,43 +120,40 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="/">Home</a>
+                    <a class="nav-link" href="/"><i class="fas fa-home"></i> Home</a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">About</a>
+                    <a class="nav-link" href="#"><i class="fas fa-info-circle"></i> About</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="contact.html">Contact</a>
+                    <a class="nav-link" href="contact.html"><i class="fas fa-envelope"></i> Contact</a>
                 </li>
             </ul>
         </div>
     </div>
 </nav>
 
-<div class="container mt-5">
-    <h2>Withdraw Money from Account</h2>
+<div class="container">
+    <h2><i class="fas fa-money-bill-wave"></i> Withdraw Money from Account</h2>
 
-    <!-- Account Details and Withdraw Form Card -->
     <div class="card">
         <div class="card-header">
-            Account Details and Withdraw Form
+            <i class="fas fa-user"></i> Account Details and Withdraw Form
         </div>
         <div class="card-body">
-            <!-- Success/Error Message (Moved above the form) -->
             <div th:if="${message}" class="alert alert-success">
-                <span th:text="${message}"></span>
+                <i class="fas fa-check-circle"></i> <span th:text="${message}"></span>
             </div>
             <div th:if="${error}" class="alert alert-danger">
-                <span th:text="${error}"></span>
+                <i class="fas fa-exclamation-circle"></i> <span th:text="${error}"></span>
             </div>
 
-            <!-- Display Account Details -->
             <table class="table table-bordered">
-                <thead>
+                <thead class="thead-light">
                 <tr>
-                    <th>Account Number</th>
-                    <th>Account Holder Name</th>
-                    <th>Current Balance</th>
+                    <th><i class="fas fa-hashtag"></i> Account Number</th>
+                    <th><i class="fas fa-user"></i> Account Holder Name</th>
+                    <th><i class="fas fa-wallet"></i> Current Balance</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -117,17 +165,19 @@
                 </tbody>
             </table>
 
-            <!-- Withdraw Form -->
             <form th:action="@{/account/withdraw/{accountNumber}(accountNumber=${account.accountNumber})}" method="post">
                 <div class="form-group">
-                    <label for="amount" class="small-label">Amount to Withdraw</label>
-                    <input type="number" id="amount" name="amount" class="form-control form-control-sm input-smaller" required />
+                    <label for="amount">Amount to Withdraw</label>
+                    <i class="fas fa-dollar-sign"></i>
+                    <input type="number" id="amount" name="amount" class="form-control form-control-sm input-smaller" placeholder="Enter amount" required>
                 </div>
-                <button type="submit" class="btn btn-success">Withdraw</button>
+                <button type="submit" class="btn btn-success"><i class="fas fa-paper-plane"></i> Withdraw</button>
+
             </form>
         </div>
     </div>
 </div>
+
 <div class="footer">
     <p>&copy; 2024 Citi Bank | <a href="#">Privacy Policy</a> | <a href="#">Terms & Conditions</a></p>
 </div>

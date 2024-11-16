@@ -7,112 +7,136 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f0f2f5;
-            color: #333;
-        }
+        body, html {
+             margin: 0;
+             padding: 0;
+             height: 100%;
+             display: flex;
+             flex-direction: column;
+         }
 
-        .navbar {
-            padding: 8px 0;
-            background-color: #005cbf;
-        }
+         body {
+          background: linear-gradient(135deg, #f3f4f6, #b7d9f888,#f3f4f6);
+ <!--          background: linear-gradient(135deg, #e0f7fa, #80deea); b3d9f2 its a light blue color-->
+ <!--  background: linear-gradient(135deg, #f3f4f6, #e5e5e5); -->
+ <!--  background: linear-gradient(135deg, #b3d9f2, #e5e5e5);-->
+             font-family: 'Arial', sans-serif;
+         }
 
-        .navbar-brand img {
-            height: 40px;
-        }
+      .navbar {
+          padding: 8px 0;
+          background-color: #005cbf;
+      }
 
-        .navbar-nav .nav-item .nav-link {
-            color: white;
-            font-size: 16px;
-        }
+      .navbar-brand img {
+          height: 40px;
+      }
 
-        .navbar-nav .nav-item .nav-link:hover {
-            color: #ffd700;
-        }
+      .navbar-nav .nav-item .nav-link {
+          color: white;
+          font-size: 16px;
+      }
 
-        .container {
-            padding: 40px;
-            background-color: #fff;
-            border-radius: 12px;
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
-            max-width: 1200px;
-            margin-top: 30px;
-        }
+      .navbar-nav .nav-item .nav-link:hover {
+          color: #ffd700;
+      }
 
-        .container h2 {
-            color: #005cbf;
-            font-size: 26px;
-            font-weight: bold;
-            text-align: center;
-            margin-bottom: 25px;
-        }
+      .container {
+          padding: 40px;
+          background-color: #fff;
+          border-radius: 12px;
+          box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+          max-width: 1200px;
+          margin-top: 30px;
+      }
 
-        .table th {
-            background-color: #005cbf;
-            color: white;
-            text-align: center;
-        }
+      .container h2 {
+          color: #005cbf;
+          font-size: 26px;
+          font-weight: bold;
+          text-align: center;
+          margin-bottom: 25px;
+      }
 
-        .table td, .table th {
-            vertical-align: middle;
-            text-align: center;
-        }
+      .table th {
+          background-color: #005cbf;
+          color: white;
+          text-align: center;
+      }
 
-        .btn {
-            font-size: 16px;
-            padding: 10px 25px;
-            border-radius: 6px;
-            display: flex;
-            align-items: center;
-        }
+      .table td, .table th {
+          vertical-align: middle;
+          text-align: center;
+      }
 
-        .btn-danger {
-            background-color: #e63946;
-            border-color: #e63946;
-        }
+      .btn {
+          font-size: 16px;
+          padding: 10px 25px;
+          border-radius: 6px;
+          display: flex;
+          align-items: center;
+      }
 
-        .btn-danger:hover {
-            background-color: #c5303d;
-            border-color: #b82834;
-        }
+      .btn-danger {
+          background-color: #e63946;
+          border-color: #e63946;
+      }
 
-        .btn-info {
-            background-color: #219ebc;
-            border-color: #219ebc;
-        }
+      .btn-danger:hover {
+          background-color: #c5303d;
+          border-color: #b82834;
+      }
 
-        .btn-info:hover {
-            background-color: #197d9c;
-            border-color: #177089;
-        }
+      .btn-warning {
+<!--          background-color: #219ebc;-->
+          border-color: #219ebc;
+      }
 
-        .btn-success {
-            background-color: #38b000;
-            border-color: #38b000;
-        }
+      .btn-warning:hover {
+<!--          background-color: #197d9c;-->
+<!--          border-color: #177089;-->
+      }
 
-        .btn-success:hover {
-            background-color: #2a8a00;
-            border-color: #247800;
-        }
+      .btn-success {
+          background-color: #38b000;
+          border-color: #38b000;
+      }
 
-        .btn-primary {
-            background-color: #0077b6;
-            border-color: #0077b6;
-        }
+      .btn-success:hover {
+          background-color: #2a8a00;
+          border-color: #247800;
+      }
 
-        .btn-primary:hover {
-            background-color: #005f99;
-            border-color: #004d7a;
-        }
+      .btn-primary {
+          background-color: #0077b6;
+          border-color: #0077b6;
+      }
 
-        .footer {
-            text-align: center;
-            margin-top: 50px;
-            font-size: 14px;
-            color: #777;
-        }
+      .btn-primary:hover {
+          background-color: #005f99;
+          border-color: #004d7a;
+      }
+
+     /* Footer Styling */
+           .footer {
+               text-align: center;
+               padding: 3px;
+               background: #004ba0;
+               color: white;
+               font-size: 13px;
+               margin-bottom: 0px;
+               margin-top: 220px
+           }
+
+           .footer a {
+               color: #ffeb3b;
+               text-decoration: none;
+               font-weight: bold;
+           }
+
+           .footer a:hover {
+               text-decoration: underline;
+           }
     </style>
 </head>
 <body>
@@ -149,15 +173,15 @@
     </div>
 
     <!-- Account Details -->
-    <table class="table table-hover table-bordered">
-        <thead>
+    <table class="table table-bordered table-hover">
+        <thead class="thead-light">
         <tr>
-            <th scope="col"><i class="fas fa-hashtag"></i> Account Number</th>
-            <th scope="col"><i class="fas fa-user"></i> Account Holder Name</th>
-            <th scope="col"><i class="fas fa-university"></i> Account Type</th>
-            <th scope="col"><i class="fas fa-envelope"></i> Email</th>
-            <th scope="col"><i class="fas fa-venus-mars"></i> Gender</th>
-            <th scope="col"><i class="fas fa-money-bill-wave"></i> Balance</th>
+            <th><i class="fas fa-hashtag"></i> Account Number</th>
+            <th><i class="fas fa-user"></i> Account Holder Name</th>
+            <th><i class="fas fa-university"></i> Account Type</th>
+            <th><i class="fas fa-envelope"></i> Email</th>
+            <th><i class="fas fa-venus-mars"></i> Gender</th>
+            <th><i class="fas fa-money-bill-wave"></i> Balance</th>
         </tr>
         </thead>
         <tbody>
@@ -183,13 +207,13 @@
         </form>
 
         <!-- New Deposit Button -->
-        <a th:href="@{/account/deposit/{accountNumber}(accountNumber=${account.accountNumber})}" class="btn btn-info mr-2">
+        <a th:href="@{/account/deposit/{accountNumber}(accountNumber=${account.accountNumber})}" class="btn btn-success mr-2">
             <i class="fas fa-plus-circle"></i>&nbsp; Deposit
         </a>
 
         <!-- Withdraw Button -->
-        <a th:href="@{/account/withdraw/{accountNumber}(accountNumber=${account.accountNumber})}" class="btn btn-success mr-2">
-            <i class="fas fa-minus-circle"></i>&nbsp; Withdraw
+        <a th:href="@{/account/withdraw/{accountNumber}(accountNumber=${account.accountNumber})}" class="btn btn-warning mr-2">
+            <i class="fas fa-minus-circle text-white"></i>&nbsp; Withdraw
         </a>
 
         <!-- Transfer Button -->

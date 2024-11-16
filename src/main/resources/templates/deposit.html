@@ -24,83 +24,92 @@
 <!--  background: linear-gradient(135deg, #b3d9f2, #e5e5e5);-->
             font-family: 'Arial', sans-serif;
         }
-       .navbar {
-           background-color: #005cbf
-       }
+
+        /* Navbar Styling */
+        .navbar {
+            background-color: #005cbf;
+            padding: 15px 0;
+        }
+
         .navbar-brand img {
-           height: 40px;
-       }
-       .container h2 {
-           color: #004ba0;
-           font-weight: bold;
-       }
-       .card {
-           margin-top: 20px;
-           border: 1px solid #ddd;
-           box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-       }
-       .card-header {
-           background-color: #004ba0;
-           color: white;
-           font-weight: bold;
-           border-top-left-radius: 10px;
-           border-top-right-radius: 10px;
-       }
+            height: 50px;
+        }
 
-       .card-body {
-           background-color: white;
-           padding: 30px;
-       }
-       .small-label {
-           font-size: 0.85rem;
-       }
+        .navbar-nav .nav-link {
+            color: white !important;
+            font-weight: bold;
+            font-size: 16px;
+        }
 
-       .form-control {
-           border-radius: 5px;
-           box-shadow: none;
-           border: 1px solid #ccc;
-       }
+        .navbar-nav .nav-link:hover {
+            color: #ffd700 !important;
+        }
 
-       .btn-success {
-           background-color: #28a745;
-           border: none;
-           border-radius: 5px;
-           padding: 10px 20px;
-           font-size: 16px;
-           transition: all 0.3s;
-       }
 
-       .btn-success:hover {
-           background-color: #218838;
-       }
+
+        /* Main Content Styling */
+        .container {
+            flex: 1; /* Pushes the footer to the bottom */
+<!--            padding: 20px;-->
+             margin-top: 20px;
+        }
+
+        .container h2 {
+            color: #004ba0;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 26px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+        }
+
+        .card {
+            margin: 20px auto;
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+            max-width: 700px;
+        }
+
+        .card-header {
+            background: #004ba0;
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            text-align: center;
+            border-radius: 15px 15px 0 0;
+        }
+
+        .card-body {
+            background: white;
+            padding: 20px;
+            border-radius: 0 0 15px 15px;
+        }
 
         /* Footer Styling */
-          .footer {
-              text-align: center;
-              padding: 3px;
-              background: #004ba0;
-              color: white;
-              font-size: 13px;
-              margin-bottom: 0px;
-              margin-top: 175px
-          }
+        .footer {
+            text-align: center;
+            padding: 2px 0;
+            background: #005cbf;
+            color: white;
+            font-size: 14px;
+        }
 
-          .footer a {
-              color: #ffeb3b;
-              text-decoration: none;
-              font-weight: bold;
-          }
+        .footer a {
+            color: #ffeb3b;
+            text-decoration: none;
+            font-weight: bold;
+        }
 
-          .footer a:hover {
-              text-decoration: underline;
-          }
-   .small-label {
+        .footer a:hover {
+            text-decoration: underline;
+        }
+        .small-label {
            font-size: 0.85rem;
        }
        .input-smaller {
            max-width: 300px; /* Adjust this value to change the input width */
        }
-
     </style>
 </head>
 <body>
@@ -118,10 +127,10 @@
                     <a class="nav-link" href="/"><i class="fas fa-home"></i> Home</a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="#"><i class="fas fa-info-circle"></i> About</a>
+                    <a class="nav-link" href="/about"><i class="fas fa-info-circle"></i> About</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="contact.html"><i class="fas fa-envelope"></i> Contact</a>
+                    <a class="nav-link" href="/contact"><i class="fas fa-envelope"></i> Contact</a>
                 </li>
             </ul>
         </div>
