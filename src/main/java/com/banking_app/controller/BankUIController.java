@@ -5,6 +5,7 @@ import com.banking_app.dto.TransferRequest;
 import com.banking_app.dto.WithDrawRequest;
 import com.banking_app.entity.Account;
 import com.banking_app.service.AccountService;
+import com.banking_app.service.NotificationService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -16,11 +17,16 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import static com.banking_app.NotificationConstant.EMAIL_SUBJECT;
+
+
 @Controller
 @AllArgsConstructor
 public class BankUIController {
 
+
     private final AccountService accountService;
+    private final NotificationService notificationService;
 
     // Home Page with Navigation
     @GetMapping("/")
@@ -68,6 +74,21 @@ public class BankUIController {
 
         Account createdAccount = accountService.createAccount(account);
         model.addAttribute("account", createdAccount);
+
+        /* sending mail logic start */
+        String to = account.getEmail(); // User-provided email
+        String body = "Dear " +  account.getName() + ",\n\n"
+                + "Account number :" +createdAccount.getAccountNumber()+ "\n\n"
+                + "Thank you for registering with Citi Bank Online Services. Your account has been successfully created.\n"
+                + "We are committed to providing you with exceptional banking experiences, right at your fingertips.\n\n"
+                + "If you have any questions, please contact our support team at support@citibank.com.\n\n"
+                + "Best regards,\n"
+                + "Citi Bank Customer Support";
+
+        notificationService.sendNotification(to, EMAIL_SUBJECT, body);
+        /* sending mail logic end */
+
+
         return "account_details"; // Show account details page after creation
     }
 
