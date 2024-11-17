@@ -64,7 +64,8 @@ public class AccountServiceImpl implements AccountService {
                 "Withdraw",
                 amount,
                 LocalDateTime.now(),
-                "Withdrawal from account"
+                "Withdrawal from account",
+                BankingUtils.transactionNumber()
         ));
         return accountRepository.save(account);
     }
@@ -83,7 +84,8 @@ public class AccountServiceImpl implements AccountService {
                 "Deposit",
                 amount,
                 LocalDateTime.now(),
-                "Deposit into account"
+                "Deposit into account",
+                BankingUtils.transactionNumber()
         ));
         return accountRepository.save(account);
     }
@@ -155,7 +157,8 @@ public class AccountServiceImpl implements AccountService {
                 "Transfer",
                 amount,
                 LocalDateTime.now(),
-                "Transfer Amount from account"
+                "Transfer Amount from account",
+                BankingUtils.transactionNumber()
         ));
 
         /* for transaction History end */

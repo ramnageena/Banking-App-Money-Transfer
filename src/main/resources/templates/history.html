@@ -143,7 +143,7 @@
     <table class="table table-bordered table-hover">
         <thead class="thead-light">
         <tr>
-            <th><i class="fas fa-hashtag"></i> Transaction ID</th>
+            <th><i class="fas fa-hashtag"></i> Transaction Id</th>
             <th><i class="fas fa-calendar-alt"></i> Date</th>
             <th><i class="fas fa-money-bill-wave"></i> Amount</th>
             <th><i class="fas fa-arrow-up"></i> Type</th>
@@ -154,7 +154,7 @@
         <tbody>
         <!-- Loop through transactions and display them -->
         <tr th:each="transaction : ${history}">
-            <td th:text="${transaction.transactionId}"></td>
+            <td th:text="${transaction.transactionNumber}"></td>
             <td th:text="${#temporals.format(transaction.transactionDate, 'dd-MMM-yyyy')}"></td>
             <td th:text="${transaction.amount}"></td>
             <td th:text="${transaction.transactionType}"></td>

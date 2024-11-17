@@ -31,6 +31,7 @@ public class TransactionHistory {
 
     private LocalDateTime transactionDate;
 
-    private String description;  // Any description or note related to the transaction
+    private String description;
+    private Long transactionNumber;
 
 }

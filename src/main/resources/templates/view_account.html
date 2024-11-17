@@ -50,93 +50,115 @@
           margin-top: 30px;
       }
 
-      .container h2 {
-          color: #005cbf;
-          font-size: 26px;
-          font-weight: bold;
-          text-align: center;
-          margin-bottom: 25px;
-      }
+        .container h2 {
+            color: #004ba0;
+            font-size: 26px;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 25px;
+        }
 
-      .table th {
-          background-color: #005cbf;
-          color: white;
-          text-align: center;
-      }
+        .table th {
+            background-color: #004ba0;
+            color: white;
+            text-align: center;
+        }
 
-      .table td, .table th {
-          vertical-align: middle;
-          text-align: center;
-      }
+        .table td, .table th {
+            vertical-align: middle;
+            text-align: center;
+        }
 
-      .btn {
-          font-size: 16px;
-          padding: 10px 25px;
-          border-radius: 6px;
-          display: flex;
-          align-items: center;
-      }
+        /* Button Styling */
+        .btn {
+            font-size: 16px;
+            padding: 12px 30px;
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
 
-      .btn-danger {
-          background-color: #e63946;
-          border-color: #e63946;
-      }
+        /* Success Button (Deposit) */
+        .btn-success {
+            background-color: #4CAF50;
+            border-color: #4CAF50;
+            color: white;
+        }
 
-      .btn-danger:hover {
-          background-color: #c5303d;
-          border-color: #b82834;
-      }
+        .btn-success:hover {
+            background-color: #45a049;
+            border-color: #45a049;
+        }
 
-      .btn-warning {
-<!--          background-color: #219ebc;-->
-          border-color: #219ebc;
-      }
+        /* Warning Button (Withdraw) */
+        .btn-warning {
+            background-color: #ff9800;
+            border-color: #ff9800;
+            color: white;
+        }
 
-      .btn-warning:hover {
-<!--          background-color: #197d9c;-->
-<!--          border-color: #177089;-->
-      }
+        .btn-warning:hover {
+            background-color: #fb8c00;
+            border-color: #fb8c00;
+            color: white;
+        }
 
-      .btn-success {
-          background-color: #38b000;
-          border-color: #38b000;
-      }
+        /* Primary Button (Transfer) */
+        .btn-primary {
+            background-color: #0077b6;
+            border-color: #0077b6;
+            color: white;
+        }
 
-      .btn-success:hover {
-          background-color: #2a8a00;
-          border-color: #247800;
-      }
+        .btn-primary:hover {
+            background-color: #005f99;
+            border-color: #004d7a;
+        }
 
-      .btn-primary {
-          background-color: #0077b6;
-          border-color: #0077b6;
-      }
+        /* Delete Button (Red) */
+        .btn-danger {
+            background-color: #f44336;
+            border-color: #f44336;
+            color: white;
+        }
 
-      .btn-primary:hover {
-          background-color: #005f99;
-          border-color: #004d7a;
-      }
+        .btn-danger:hover {
+            background-color: #e53935;
+            border-color: #e53935;
+        }
 
-     /* Footer Styling */
-           .footer {
-               text-align: center;
-               padding: 3px;
-               background: #004ba0;
-               color: white;
-               font-size: 13px;
-               margin-bottom: 0px;
-               margin-top: 220px
-           }
+        /* Info Button (History) */
+        .btn-info {
+            background-color: #00bcd4;
+            border-color: #00bcd4;
+            color: white;
+        }
 
-           .footer a {
-               color: #ffeb3b;
-               text-decoration: none;
-               font-weight: bold;
-           }
+        .btn-info:hover {
+            background-color: #0097a7;
+            border-color: #0097a7;
+        }
 
-           .footer a:hover {
-               text-decoration: underline;
-           }
+        /* Footer Styling */
+        .footer {
+            text-align: center;
+            padding: 3px;
+            background: #004ba0;
+            color: white;
+            font-size: 13px;
+            margin-top: 220px;
+        }
+
+        .footer a {
+            color: #ffeb3b;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
@@ -146,7 +168,6 @@
     </a>
     <div class="collapse navbar-collapse justify-content-end">
         <ul class="navbar-nav">
-
             <li class="nav-item">
                 <a class="nav-link" href="/"><i class="fas fa-home"></i> Home</a>
             </li>
@@ -159,7 +180,6 @@
             <li class="nav-item">
                 <a class="nav-link" href="/logout" onclick="return confirm('Are you sure you want to logout this account?')"><i class="fas fa-sign-out-alt"></i> Logout </a>
             </li>
-
         </ul>
     </div>
 </nav>
@@ -198,14 +218,6 @@
 
     <!-- Buttons aligned side by side -->
     <div class="d-flex justify-content-center mt-4">
-        <!-- Delete Account Button -->
-        <form th:action="@{/account/delete/{accountNumber}(accountNumber=${account.accountNumber})}" method="post" class="mr-2">
-            <input type="hidden" name="_method" value="delete" />
-            <button type="submit" class="btn btn-danger mr-2" onclick="return confirm('Are you sure you want to delete this account?')">
-                <i class="fas fa-trash-alt"></i>&nbsp; Delete
-            </button>
-        </form>
-
         <!-- New Deposit Button -->
         <a th:href="@{/account/deposit/{accountNumber}(accountNumber=${account.accountNumber})}" class="btn btn-success mr-2">
             <i class="fas fa-plus-circle"></i>&nbsp; Deposit
@@ -213,11 +225,11 @@
 
         <!-- Withdraw Button -->
         <a th:href="@{/account/withdraw/{accountNumber}(accountNumber=${account.accountNumber})}" class="btn btn-warning mr-2">
-            <i class="fas fa-minus-circle text-white"></i>&nbsp; Withdraw
+            <i class="fas fa-minus-circle"></i>&nbsp; Withdraw
         </a>
 
         <!-- Transfer Button -->
-        <a th:href="@{/account/transfer/{accountNumber}(accountNumber=${account.accountNumber})}" class="btn btn-primary mr-3"> <!-- Adjusted margin here -->
+        <a th:href="@{/account/transfer/{accountNumber}(accountNumber=${account.accountNumber})}" class="btn btn-primary mr-3">
             <i class="fas fa-exchange-alt"></i>&nbsp; Transfer
         </a>
 
@@ -225,8 +237,17 @@
         <a th:href="@{/account/history/{accountNumber}(accountNumber=${account.accountNumber})}" class="btn btn-info mr-5">
             <i class="fas fa-history"></i>&nbsp; History
         </a>
+
+        <!-- Delete Account Button -->
+        <form th:action="@{/account/delete/{accountNumber}(accountNumber=${account.accountNumber})}" method="post" class="mr-2">
+            <input type="hidden" name="_method" value="delete" />
+            <button type="submit" class="btn btn-danger mr-2" onclick="return confirm('Are you sure you want to delete this account?')">
+                <i class="fas fa-trash-alt"></i>&nbsp; Delete
+            </button>
+        </form>
     </div>
 </div>
+
 <div class="footer">
     <p>&copy; 2024 Citi Bank | <a href="#">Privacy Policy</a> | <a href="#">Terms & Conditions</a></p>
 </div>
