@@ -3,6 +3,7 @@ package com.banking_app;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.info.Contact;
 import io.swagger.v3.oas.annotations.info.Info;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 @OpenAPIDefinition(
@@ -17,10 +18,17 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 		)
 )
 @SpringBootApplication
+@Slf4j
 public class BankingAppApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(BankingAppApplication.class, args);
+		try{
+			SpringApplication.run(BankingAppApplication.class, args);
+			log.info("::BankingAppApplication Application stated::");
+		}catch (Exception e){
+			log.error("Application is not started : {}",e.getMessage());
+		}
+
 	}
 
 }

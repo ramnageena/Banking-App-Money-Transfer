@@ -1,7 +1,9 @@
 package com.banking_app.service.impl;
 
 import com.banking_app.Repository.AccountRepository;
+import com.banking_app.Repository.TransactionHistoryRepository;
 import com.banking_app.entity.Account;
+import com.banking_app.entity.TransactionHistory;
 import com.banking_app.exception.AccountAlreadyExist;
 import com.banking_app.exception.AccountNotFoundException;
 import com.banking_app.exception.InsufficientException;
@@ -12,6 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,6 +24,7 @@ import java.util.Optional;
 public class AccountServiceImpl implements AccountService {
 
     private final AccountRepository accountRepository;
+    private final TransactionHistoryRepository transactionHistoryRepository;
 
     @Override
     @Transactional
@@ -53,9 +57,17 @@ public class AccountServiceImpl implements AccountService {
 
         account.setBalance(account.getBalance() - amount);
         log.info("Withdrawal successful, new balance for Account Number {}: {}", accountNumber, account.getBalance());
+        // Record transaction history for the withdrawal
+        recordTransaction(new TransactionHistory(
+                null,
+                accountNumber,
+                "Withdraw",
+                amount,
+                LocalDateTime.now(),
+                "Withdrawal from account"
+        ));
         return accountRepository.save(account);
     }
-
     @Override
     @Transactional
     public Account depositAmount(Long accountNumber, Long amount) {
@@ -63,6 +75,16 @@ public class AccountServiceImpl implements AccountService {
         log.info("Processing deposit for Account Number: {}", accountNumber);
         account.setBalance(account.getBalance() + amount);
         log.info("Deposit successful, new balance for Account Number {}: {}", accountNumber, account.getBalance());
+
+        // Record transaction history for the deposit
+        recordTransaction(new TransactionHistory(
+                null,
+                accountNumber,
+                "Deposit",
+                amount,
+                LocalDateTime.now(),
+                "Deposit into account"
+        ));
         return accountRepository.save(account);
     }
 
@@ -126,10 +148,23 @@ public class AccountServiceImpl implements AccountService {
 
         double totalBalance = toAccount.getBalance() + amount;
         toAccount.setBalance(totalBalance);
+        /* for transaction History start */
+        recordTransaction(new TransactionHistory(
+                null,
+                fromAccountNumber,
+                "Transfer",
+                amount,
+                LocalDateTime.now(),
+                "Transfer Amount from account"
+        ));
+
+        /* for transaction History end */
+
         accountRepository.save(toAccount);
         log.info("Credited {} to receiver account {}. New balance: {}", amount, toAccountNumber, totalBalance);
 
         log.info("Money transfer from account: {} to account: {} completed successfully", fromAccountNumber, toAccountNumber);
+
     }
 
     // Check if email exists
@@ -139,4 +174,13 @@ public class AccountServiceImpl implements AccountService {
     }
 
 
+    @Override
+    public List<TransactionHistory> getTransactionHistory(Long accountNumber) {
+        return transactionHistoryRepository.findByAccountNumber(accountNumber);
+    }
+
+    @Override
+    public void recordTransaction(TransactionHistory transactionHistory) {
+        transactionHistoryRepository.save(transactionHistory);
+    }
 }

@@ -4,10 +4,13 @@ import com.banking_app.dto.LoginRequest;
 import com.banking_app.dto.TransferRequest;
 import com.banking_app.dto.WithDrawRequest;
 import com.banking_app.entity.Account;
+import com.banking_app.entity.TransactionHistory;
 import com.banking_app.service.AccountService;
 import com.banking_app.service.NotificationService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -17,33 +20,42 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import static com.banking_app.NotificationConstant.EMAIL_SUBJECT;
+import java.util.List;
+
+import static com.banking_app.constant.NotificationConstant.EMAIL_SUBJECT;
 
 
 @Controller
-@AllArgsConstructor
+
 public class BankUIController {
 
+    @Autowired
+    private  AccountService accountService;
+    @Autowired
+    private  NotificationService notificationService;
 
-    private final AccountService accountService;
-    private final NotificationService notificationService;
+    @Value("${sending.mail}")
+    boolean isSendingMail;
 
     // Home Page with Navigation
     @GetMapping("/")
     public String homePage() {
         return "home";
     }
+
     // Contact Page with Navigation
     @GetMapping("/contact")
     String getContact() {
         return "contact";
     }
+
     // About Page with Navigation
     @GetMapping("/about")
     String getAbout() {
         return "about";
 
     }
+
     @GetMapping("/logout")
     public String logout(Model model) {
         // Perform any necessary cleanup here if needed
@@ -62,7 +74,7 @@ public class BankUIController {
 
     // Handle account creation
     @PostMapping("/account/save")
-    public String createAccount(@Valid @ModelAttribute("account")Account account, BindingResult bindingResult, Model model) {
+    public String createAccount(@Valid @ModelAttribute("account") Account account, BindingResult bindingResult, Model model) {
         // Check if email is unique
         if (accountService.emailExists(account.getEmail())) {
             bindingResult.rejectValue("email", "error.account", "This email address is already in use. Please try a different one.!!");
@@ -77,15 +89,18 @@ public class BankUIController {
 
         /* sending mail logic start */
         String to = account.getEmail(); // User-provided email
-        String body = "Dear " +  account.getName() + ",\n\n"
-                + "Account number :" +createdAccount.getAccountNumber()+ "\n\n"
+        String body = "Dear " + account.getName() + ",\n\n"
+                + "Account number :" + createdAccount.getAccountNumber() + "\n\n"
                 + "Thank you for registering with Citi Bank Online Services. Your account has been successfully created.\n"
                 + "We are committed to providing you with exceptional banking experiences, right at your fingertips.\n\n"
                 + "If you have any questions, please contact our support team at support@citibank.com.\n\n"
                 + "Best regards,\n"
                 + "Citi Bank Customer Support";
 
-        notificationService.sendNotification(to, EMAIL_SUBJECT, body);
+        //FLag for sending mail if you want send the mail please enable this flag in application.properties
+        if (isSendingMail) {
+            notificationService.sendNotification(to, EMAIL_SUBJECT, body);
+        }
         /* sending mail logic end */
 
 
@@ -103,14 +118,14 @@ public class BankUIController {
             return "account-not-found"; // Error page if account is not found
         }
         model.addAttribute("account", account);
-        model.addAttribute("message", "Amount transfer to account : "+account.getAccountNumber()+ " : Successfully !!");
+        model.addAttribute("message", "Amount transfer to account : " + account.getAccountNumber() + " : Successfully !!");
         return "view_account"; // Template for viewing account details
     }
 
 
     @GetMapping("/account/view-form")
     public String showViewAccountForm(Model model) {
-        model.addAttribute("account",new LoginRequest()); // Empty account object to bind form fields
+        model.addAttribute("account", new LoginRequest()); // Empty account object to bind form fields
         return "view_account_form"; // Return the view_account_form.html page
     }
 
@@ -220,6 +235,26 @@ public class BankUIController {
         model.addAttribute("account", account);
         return "transfer";
     }
+
+        @GetMapping("/account/history/{accountNumber}")
+    public String viewTransactionHistory(@PathVariable Long accountNumber, Model model) {
+        Account account = accountService.viewAccount(accountNumber);
+
+        if (account == null) {
+            // Handle the case where account is not found, e.g., show a 404 page
+            return "error";  // Return a custom error page or an error view
+        }
+
+        List<TransactionHistory> history = accountService.getTransactionHistory(accountNumber);
+
+        model.addAttribute("account", account);
+        model.addAttribute("history", history);
+        //model.addAttribute("transaction", new TransactionHistory()); // Add empty transaction for form
+
+        return "history";  // Make sure this matches your HTML view name
+    }
+
+
 
     // Handle transfer submission
     @PostMapping("/account/transfer")
